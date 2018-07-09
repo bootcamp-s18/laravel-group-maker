@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Home</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -14,7 +14,21 @@
                         </div>
                     @endif
 
-                    You are logged in!
+
+                    @if (Auth::user()->is_admin)
+
+                        You are an admin!
+
+                    @else
+
+                        You are not an admin!
+
+                    @endif
+
+
+                    <p><a href="/groups/create">Create a group</a></p>
+
+
                 </div>
             </div>
         </div>

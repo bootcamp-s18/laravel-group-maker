@@ -97,3 +97,20 @@ One user to one profile.
 * We need the ability to block and ban.
 
 
+
+## Messaging
+
+* Users should get in-app messages when:
+	* They join a public group
+	* They join a private group and their membership is approved
+	* They join a private group and their membership is denied
+	* Users join their public groups
+	* Users ask to join their private groups
+
+
+## Future ideas
+
+* Send email if user is offline when an in-app message is generated for them
+
+
+
