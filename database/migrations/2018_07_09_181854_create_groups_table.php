@@ -19,7 +19,7 @@ class CreateGroupsTable extends Migration
             $table->text('description');
             $table->unsignedInteger('creator_id');
             $table->foreign('creator_id')->references('id')->on('users');
-            $table->integer('activity_id')->unsigned();
+            $table->unsignedInteger('activity_id');
             $table->foreign('activity_id')->references('id')->on('activities');
             $table->boolean('is_private')->default(0);
             $table->boolean('is_accepting_members')->default(1);

@@ -58,13 +58,18 @@ One user to one profile.
 
 ### Users
 
+* id
+* username
+* email_address
+* password
 * is_admin
+* timestamps
 
 ### Profiles
 
-* home_timezonex
+* home_timezones
 * location (?)
-
+* timestamps
 
 ### Groups
 
@@ -80,6 +85,7 @@ One user to one profile.
 * group_location (?)
 * group_primary_timezone (default to creator's timezone)
 * invitation_key
+* timestamps
 
 
 ### Activities
@@ -87,7 +93,7 @@ One user to one profile.
 * id
 * name
 * description
-
+* timestamps
 
 
 ## Business Decisions
@@ -111,6 +117,7 @@ One user to one profile.
 ## Future ideas
 
 * Send email if user is offline when an in-app message is generated for them
+* Should a creator always automatically be a participant? Is that an option dependent on the activity? Or should it be set at the group level?
 
 
 
