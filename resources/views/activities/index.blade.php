@@ -23,7 +23,7 @@
 					<td>{{ $activity->name }}</td>
 					<td>{{ $activity->groups()->count() }}</td>
 					<td>{{ $activity->participants() }}</td>
-					<td>Edit | Delete</td>
+					<td><a href="/activities/{{ $activity->id }}/edit"><i class="fas fa-pencil-alt"></i></a> <i class="fas fa-backspace"></i></td>
 				</tr>
 
 			@endforeach
