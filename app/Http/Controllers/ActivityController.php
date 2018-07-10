@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 class ActivityController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -74,9 +84,7 @@ class ActivityController extends Controller
         $activity->name = $request->input('activityName');
         $activity->description = $request->input('activityDescription');
         $activity->save();
-
         $request->session()->flash('status', 'Activity updated!');
-
         return redirect()->route('activities.index');
     }
 
@@ -86,8 +94,10 @@ class ActivityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        \App\Activity::destroy($id);
+        $request->session()->flash('status', 'Activity deleted!');
+        return redirect()->route('activities.index');
     }
 }

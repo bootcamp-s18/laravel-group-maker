@@ -23,7 +23,13 @@
 					<td>{{ $activity->name }}</td>
 					<td>{{ $activity->groups()->count() }}</td>
 					<td>{{ $activity->participants() }}</td>
-					<td><a href="/activities/{{ $activity->id }}/edit"><i class="fas fa-pencil-alt"></i></a> <i class="fas fa-backspace"></i></td>
+					<td><a href="/activities/{{ $activity->id }}/edit"><i class="fas fa-pencil-alt"></i></a> 
+						<form method="post" action="/activities/{{ $activity->id }}">
+							@csrf
+							{{ method_field('DELETE') }}
+							<button class="btn" type="submit"><i class="fas fa-backspace"></i></button>
+						</form>
+					</td>
 				</tr>
 
 			@endforeach
