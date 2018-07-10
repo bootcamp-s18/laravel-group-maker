@@ -12,10 +12,10 @@ The intent is for in-person meetings, but could also be used for virtual meeting
 * Home - what users see after they log in (unless they were attempting to access a restricted page, then they go to that one).
 * Admins:
 	* Create/update tag list
+	* Create/update activities
 	* Block/ban users
 	* Delete groups
 	* Rule with an iron fist!
-	* Set up systems and versions
 * Anyone:
 	* See their own groups
 	* Create a new group

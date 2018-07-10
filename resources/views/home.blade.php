@@ -1,37 +1,29 @@
 @extends('layouts.app')
 
+@section('title')
+    Home
+@endsection
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Home</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+    @if (Auth::user()->is_admin)
 
+        <h2>Admin Functions</h2>
 
-                    @if (Auth::user()->is_admin)
+        <ul>
+            <li><a href="/activities">Manage Activities</a></li>
+            <li><a href="/groups">Manage Groups</a></li>
+        </ul>
 
-                        You are an admin!
+    @endif
 
-                    @else
+    <h2>Manage My Groups and Memberships</h2>
 
-                        You are not an admin!
+    <ul>
+        <li><a href="#">Find a Group</a></li>
+        <li><a href="/groups/create">Create a Group</a></li>
+        <li><a href="#">Join a Private Group</a></li>
+        <li><a href="#">Leave a Group</a></li>
+    </ul>
 
-                    @endif
-
-
-                    <p><a href="/groups/create">Create a group</a></p>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection

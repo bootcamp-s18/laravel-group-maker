@@ -18,3 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/activities', function() {
+	$activities = \App\Activity::all();
+	return view('activities.index', compact('activities'));
+});
+
+Route::get('/groups', function() {
+	$groups = \App\Group::all();
+	return view('groups.index', compact('groups'));
+});
+

@@ -34,7 +34,7 @@ class GroupsTableSeeder_Development extends Seeder
 
 
 
-		// Group #1 - a full group with creator as participant
+		// Group #1 - a full group with creator as participant.
 		// This example manipulates the database directly with insert statements.
     	DB::table('groups')->insert([
     		'name' => 'Aaron\'s Wednesday Card Game',
@@ -80,10 +80,24 @@ class GroupsTableSeeder_Development extends Seeder
        	]);
 
 
+    	// Group #2 - a private group that's looking for a player, with creator as participant.
+    	// This example uses models to interact with the database.
+    	$group2 = new \App\Group;
+    	$group2->name = 'Erik Loves Monopoly';
+    	$group2->description = 'Erik says he hates Monopoly, but we make him play anyway';
+    	$group2->creator_id = $erik->id;
+    	$group2->activity_id = $monopoly->id;
+    	$group2->is_private = 1;
+    	$group2->is_accepting_members = 1;
+    	$group2->max_members = 4;
+    	$group2->is_virtual = 0;
+    	$group2->invitation_key = Uuid::generate();
+    	$group2->save();
 
-
-
-
+    	// Add members to group
+    	$group2->members()->attach($erik->id);
+    	$group2->members()->attach($chris->id);
+    	$group2->members()->attach(\App\User::where('name', '=', 'Ginny')->first()->id);
 
 
     }
