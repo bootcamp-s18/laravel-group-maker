@@ -45,7 +45,12 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $activity = new \App\Activity;
+        $activity->name = $request->input('activityName');
+        $activity->description = $request->input('activityDescription');
+        $activity->save();
+        $request->session()->flash('status', 'Activity created!');
+        return redirect()->route('activities.index');
     }
 
     /**

@@ -6,6 +6,21 @@
 
 @section('content')
 
+	<a href="#">New Activity</a>
+
+	<form class="pb-4" method="post" action="/activities">
+		@csrf
+		<div class="form-group">
+			<label for="name">Activity Name</label>
+			<input type="text" class="form-control" name="activityName" id="name">
+		</div>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea class="form-control" id="description" name="activityDescription" rows="3"></textarea>
+		</div>
+		<button class="btn btn-primary" type="submit">Create</button>
+	</form>
+
 	<table class="table">
 		<thead>
 			<tr>
