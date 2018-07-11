@@ -45,6 +45,12 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'activityName' => 'required|unique:activities,name',
+            'activityDescription' => 'required',
+        ]);
+
         $activity = new \App\Activity;
         $activity->name = $request->input('activityName');
         $activity->description = $request->input('activityDescription');
@@ -85,6 +91,12 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $validatedData = $request->validate([
+            'activityName' => 'required|unique:activities,name,' . $id,
+            'activityDescription' => 'required',
+        ]);
+
         $activity = \App\Activity::find($id);
         $activity->name = $request->input('activityName');
         $activity->description = $request->input('activityDescription');

@@ -15,7 +15,7 @@
 			<input type="text" class="form-control" name="activityName" id="name">
 		</div>
 		<div class="form-group">
-			<label for="description">Description</label>
+			<label for="description">Activity Description</label>
 			<textarea class="form-control" id="description" name="activityDescription" rows="3"></textarea>
 		</div>
 		<button class="btn btn-primary" type="submit">Create</button>
