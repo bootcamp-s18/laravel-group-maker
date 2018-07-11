@@ -28,7 +28,13 @@
 							<button class="btn btn-sm"><a href="/activities/{{ $activity->id }}/edit"><i class="fas fa-pencil-alt text-info"></i></a></button>
 							@csrf
 							{{ method_field('DELETE') }}
-							<button class="btn btn-sm" type="submit"><i class="far fa-trash-alt text-danger"></i></button>
+
+							@if ($activity->groups()->count() > 0)
+								<button class="btn btn-sm" type="button"><i class="far fa-trash-alt text-medium" disabled></i></button>
+							@else
+								<button class="btn btn-sm" type="submit"><i class="far fa-trash-alt text-danger"></i></button>
+							@endif
+
 						</form>
 					</td>
 				</tr>
