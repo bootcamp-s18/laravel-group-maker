@@ -23,8 +23,15 @@ class ActivityController extends Controller
      */
     public function index()
     {
-         $activities = \App\Activity::orderBy('name')->get();
-         return view('activities.index', compact('activities'));
+        $showForm = false;
+
+        // TODO: It would be really cool if this worked.
+        // if ($errors->any()) {
+        //     $showForm = true;
+        // }
+
+        $activities = \App\Activity::orderBy('name')->get();
+        return view('activities.index', compact('activities', 'showForm'));
     }
 
     /**

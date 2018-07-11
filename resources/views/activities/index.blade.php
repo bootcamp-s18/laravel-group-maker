@@ -22,7 +22,7 @@
 
 	<p><a id="toggleText" href="#" onclick="toggleNewActivityForm()">Show New Activity Form</a></p>
 
-	<div id="newActivityForm" style="display: none;" class="p-3 m-3">
+	<div id="newActivityForm" style="display: {{ $showForm ? 'block' : 'none' }};" class="p-3 m-3">
 		<form class="pb-4" method="post" action="/activities">
 			@csrf
 			<div class="form-group">
