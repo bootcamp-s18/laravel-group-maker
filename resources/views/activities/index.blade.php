@@ -23,11 +23,12 @@
 					<td>{{ $activity->name }}</td>
 					<td>{{ $activity->groups()->count() }}</td>
 					<td>{{ $activity->participants() }}</td>
-					<td><a href="/activities/{{ $activity->id }}/edit"><i class="fas fa-pencil-alt"></i></a> 
+					<td>
 						<form method="post" action="/activities/{{ $activity->id }}">
+							<button class="btn btn-sm"><a href="/activities/{{ $activity->id }}/edit"><i class="fas fa-pencil-alt text-info"></i></a></button>
 							@csrf
 							{{ method_field('DELETE') }}
-							<button class="btn" type="submit"><i class="fas fa-backspace"></i></button>
+							<button class="btn btn-sm" type="submit"><i class="far fa-trash-alt text-danger"></i></button>
 						</form>
 					</td>
 				</tr>
