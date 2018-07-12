@@ -31,6 +31,12 @@ class ActivityController extends Controller
         // }
 
         $activities = \App\Activity::orderBy('name')->get();
+
+        foreach ($activities as $activity) {
+            $activity->numberOfGroups = $activity->groups()->count();
+            $activity->numberOfParticipants = $activity->participants();
+        }
+
         return view('activities.index', compact('activities', 'showForm'));
     }
 

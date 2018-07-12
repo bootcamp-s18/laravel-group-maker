@@ -19,4 +19,9 @@ WHERE group_id IN (SELECT id FROM groups WHERE activity_id = ?)', [$this->id]);
     	return $results[0]->count;
 
     }
+
+    public function test() {
+        return $this->hasManyThrough('App\User', 'App\Group');
+    }
+
 }
