@@ -1,7 +1,10 @@
 <template>
     <div>
 
-        <input type="text" v-model="searchString" placeholder="Enter your search terms" />
+        <div class="form-group">
+            <label for="searchBox" class="font-weight-bold">Filter Activities:</label>
+            <input id="searchBox" class="form-control" type="text" v-model="searchString" placeholder="Enter your search terms" />
+        </div>
 
         <table class="table">
             <thead>

@@ -47351,6 +47351,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -47400,26 +47403,39 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.searchString,
-          expression: "searchString"
-        }
-      ],
-      attrs: { type: "text", placeholder: "Enter your search terms" },
-      domProps: { value: _vm.searchString },
-      on: {
-        input: function($event) {
-          if ($event.target.composing) {
-            return
+    _c("div", { staticClass: "form-group" }, [
+      _c(
+        "label",
+        { staticClass: "font-weight-bold", attrs: { for: "searchBox" } },
+        [_vm._v("Filter Activities:")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.searchString,
+            expression: "searchString"
           }
-          _vm.searchString = $event.target.value
+        ],
+        staticClass: "form-control",
+        attrs: {
+          id: "searchBox",
+          type: "text",
+          placeholder: "Enter your search terms"
+        },
+        domProps: { value: _vm.searchString },
+        on: {
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchString = $event.target.value
+          }
         }
-      }
-    }),
+      })
+    ]),
     _vm._v(" "),
     _c("table", { staticClass: "table" }, [
       _vm._m(0),
