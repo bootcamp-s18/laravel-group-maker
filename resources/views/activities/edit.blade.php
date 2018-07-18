@@ -1,10 +1,10 @@
 @extends('layouts.card')
 
-@section('title')
+@section('card-title')
 	Edit Activity
 @endsection
 
-@section('content')
+@section('card-body')
 
 	<form method="post" action="/activities/{{ $activity->id }}">
 		@csrf
@@ -20,6 +20,7 @@
 			<textarea class="form-control" id="description" name="activityDescription" rows="3">{{ $activity->description }}</textarea>
 		</div>
 
+		<a href="/activities" class="btn btn-secondary">Cancel</a>
 		<button class="btn btn-primary" type="submit">Save</button>
 
 	</form>

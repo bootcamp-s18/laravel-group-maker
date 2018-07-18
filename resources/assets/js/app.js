@@ -15,7 +15,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('activities-table', require('./components/ActivitiesTable.vue'));
+Vue.component('groups-table', require('./components/GroupsTable.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -1,24 +1,29 @@
 @extends('layouts.card')
 
-@section('title')
+@section('card-title')
     Home
 @endsection
 
-@section('content')
+@section('card-body')
 
     @if (Auth::user()->is_admin)
 
         <h2>Admin Functions</h2>
 
         <ul>
+            <li><a href="/settings">Manage Site Settings</a></li>
             <li><a href="/activities">Manage Activities</a></li>
-            <li><a href="/groups">Manage Groups</a></li>
         </ul>
 
     @endif
 
-    <h2>Manage My Groups and Memberships</h2>
+    <h2>My Groups</h2>
+    <ul>
+        <li><a href="/groups">Manage Groups</a></li>
+    </ul>
 
+
+    <h2>My Memberships</h2>
     <ul>
         <li><a href="#">Find a Group</a></li>
         <li><a href="/groups/create">Create a Group</a></li>

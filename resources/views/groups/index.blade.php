@@ -1,11 +1,11 @@
 @extends('layouts.card')
 
-@section('title')
+@section('card-title')
 	Manage Groups
 @endsection
 
-@section('content')
+@section('card-body')
 
-Hello from groups page!
+<groups-table :groups-data='{{ $groups->toJson() }}'></groups-table>
 
 @endsection

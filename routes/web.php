@@ -21,8 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/activities', 'ActivityController');
 
-Route::get('/groups', function() {
-	$groups = \App\Group::orderBy('name')->get();
-	return view('groups.index', compact('groups'));
-});
+Route::resource('/groups', 'GroupController');
+
 
