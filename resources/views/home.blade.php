@@ -19,6 +19,7 @@
 
     <h2>My Groups</h2>
     <ul>
+        <li><a href="/groups/create">Create a Group</a></li>
         <li><a href="/groups">Manage Groups</a></li>
     </ul>
 
@@ -26,7 +27,6 @@
     <h2>My Memberships</h2>
     <ul>
         <li><a href="#">Find a Group</a></li>
-        <li><a href="/groups/create">Create a Group</a></li>
         <li><a href="#">Join a Private Group</a></li>
         <li><a href="#">Leave a Group</a></li>
     </ul>

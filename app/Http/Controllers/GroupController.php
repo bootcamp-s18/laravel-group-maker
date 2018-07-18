@@ -38,7 +38,8 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return "I should display the new record form now!";
+        $activities = \App\Activity::orderBy('name')->get();
+        return view('groups.create', compact('activities'));
     }
 
     /**
@@ -49,7 +50,20 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        return "I should save a new record now!";
+        $input = $request->input();
+        $group = new \App\Group;
+        $group->name = $input['groupName'];
+        $group->description = $input['groupDescription'];
+        $group->creator_id = \Auth::user()->id;
+        $group->activity_id = $input['activityId'];
+        $group->max_members = $input['maxMembers'];
+        $group->is_private = (array_key_exists('isPrivate', $input)) ? '1' : '0';
+        $group->is_virtual = (array_key_exists('isVirtual', $input)) ? '1' : '0';
+        $group->is_accepting_members = (array_key_exists('isAcceptingMembers', $input)) ? '1' : '0';
+        $group->invitation_key = \Uuid::generate();
+        $group->save();
+        $request->session()->flash('status', 'Group created!');
+        return redirect()->route('groups.index');
     }
 
     /**
