@@ -47696,7 +47696,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
 
-            return group_array;
+            return groups_array;
         }
 
     }

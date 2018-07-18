@@ -76,7 +76,7 @@
                     }
                 });
 
-                return group_array;
+                return groups_array;
 
             }
 
