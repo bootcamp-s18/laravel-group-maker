@@ -11,11 +11,11 @@
 			@csrf
 			<div class="form-group">
 				<label for="name">Activity Name</label>
-				<input type="text" class="form-control" name="activityName" id="name">
+				<input type="text" class="form-control" name="activityName" id="name" value="{{ old('activityName') }}">
 			</div>
 			<div class="form-group">
 				<label for="description">Activity Description</label>
-				<textarea class="form-control" id="description" name="activityDescription" rows="3"></textarea>
+				<textarea class="form-control" id="description" name="activityDescription" rows="3">{{ old('activityDescription') }}</textarea>
 			</div>
 			<button class="btn btn-secondary" type="reset">Clear Form</button>
 			<button class="btn btn-primary" type="submit">Create a New Activity</button>
