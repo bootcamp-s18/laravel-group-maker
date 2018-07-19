@@ -27,14 +27,14 @@
                     <td>
                         <div class="row">
                             <div class="col-xs-auto">
-                                <button class="btn btn-sm"><a :href="'/groups/' + group.id + '/edit'"><i class="fas fa-pencil-alt text-info"></i></a></button>
+                                <button class="btn btn-sm" v-if="group.creator_id == currentUserId"><a :href="'/groups/' + group.id + '/edit'"><i class="fas fa-pencil-alt text-info"></i></a></button>
+                                <button class="btn btn-sm" v-else disabled><i class="fas fa-pencil-alt"></i></button>
                             </div>
                             <div class="col-xs-auto">
                                 <form method="post" :action="'/groups/' + group.id">
                                     <input type="hidden" name="_token" :value="csrf">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <button v-if="group.name == 'Cheese'" class="btn btn-sm" type="button"><i class="far fa-trash-alt text-medium" disabled></i></button>
-                                    <button v-else class="btn btn-sm" type="submit"><i class="far fa-trash-alt text-danger"></i></button>
+                                    <button class="btn btn-sm" type="submit"><i class="far fa-trash-alt text-danger"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
 <script>
     export default {
 
-        props: ['groupsData'],
+        props: ['groupsData', 'currentUserId'],
 
         data: () => ({
             searchString: '',

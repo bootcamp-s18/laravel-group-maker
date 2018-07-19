@@ -6,6 +6,6 @@
 
 @section('card-body')
 
-<groups-table :groups-data='{{ $groups->toJson() }}'></groups-table>
+<groups-table :groups-data='{{ $groups->toJson() }}' :current-user-id="{{ Auth::user()->id }}"></groups-table>
 
 @endsection

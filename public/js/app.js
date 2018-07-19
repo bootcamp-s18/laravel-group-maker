@@ -47665,7 +47665,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['groupsData'],
+    props: ['groupsData', 'currentUserId'],
 
     data: function data() {
         return {
@@ -47765,13 +47765,23 @@ var render = function() {
             _c("td", [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-xs-auto" }, [
-                  _c("button", { staticClass: "btn btn-sm" }, [
-                    _c(
-                      "a",
-                      { attrs: { href: "/groups/" + group.id + "/edit" } },
-                      [_c("i", { staticClass: "fas fa-pencil-alt text-info" })]
-                    )
-                  ])
+                  group.creator_id == _vm.currentUserId
+                    ? _c("button", { staticClass: "btn btn-sm" }, [
+                        _c(
+                          "a",
+                          { attrs: { href: "/groups/" + group.id + "/edit" } },
+                          [
+                            _c("i", {
+                              staticClass: "fas fa-pencil-alt text-info"
+                            })
+                          ]
+                        )
+                      ])
+                    : _c(
+                        "button",
+                        { staticClass: "btn btn-sm", attrs: { disabled: "" } },
+                        [_c("i", { staticClass: "fas fa-pencil-alt" })]
+                      )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-xs-auto" }, [
@@ -47794,32 +47804,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      group.name == "Cheese"
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-sm",
-                              attrs: { type: "button" }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "far fa-trash-alt text-medium",
-                                attrs: { disabled: "" }
-                              })
-                            ]
-                          )
-                        : _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-sm",
-                              attrs: { type: "submit" }
-                            },
-                            [
-                              _c("i", {
-                                staticClass: "far fa-trash-alt text-danger"
-                              })
-                            ]
-                          )
+                      _vm._m(1, true)
                     ]
                   )
                 ])
@@ -47851,6 +47836,16 @@ var staticRenderFns = [
         _c("th", [_vm._v("Actions")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-sm", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "far fa-trash-alt text-danger" })]
+    )
   }
 ]
 render._withStripped = true
