@@ -15,7 +15,7 @@ class CreateGroupsTable extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description');
             $table->unsignedInteger('creator_id');
             $table->foreign('creator_id')->references('id')->on('users');
@@ -25,7 +25,7 @@ class CreateGroupsTable extends Migration
             $table->boolean('is_accepting_members')->default(1);
             $table->unsignedInteger('max_members');
             $table->boolean('is_virtual')->default(0);
-            $table->uuid('invitation_key');
+            $table->uuid('invitation_key')->unique();
             $table->timestamps();
         });
     }

@@ -50,6 +50,14 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validatedData = $request->validate([
+            'groupName' => 'required|unique:groups,name',
+            'groupDescription' => 'required',
+            'activityId' => 'required|exists:activities,id',
+            'maxMembers' => 'min:1|max:100'
+        ]);
+
         $input = $request->input();
         $group = new \App\Group;
         $group->name = $input['groupName'];
