@@ -14,7 +14,7 @@ class Activity extends Model
     public function participants() {
 
     	$results = DB::select('SELECT count(*) FROM group_user
-WHERE group_id IN (SELECT id FROM groups WHERE activity_id = ?)', [$this->id]);
+WHERE group_id IN (SELECT id FROM groups WHERE activity_id = ? and deleted_at is null)', [$this->id]);
 
     	return $results[0]->count;
 

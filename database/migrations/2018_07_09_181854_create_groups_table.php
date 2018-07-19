@@ -27,6 +27,7 @@ class CreateGroupsTable extends Migration
             $table->boolean('is_virtual')->default(0);
             $table->uuid('invitation_key')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

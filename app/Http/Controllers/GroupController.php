@@ -146,8 +146,18 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        return "I should delete a record now!";
+        $group = \App\Group::find($id);
+        if (\Auth::user()->is_admin || $group->creator_id == \Auth::user()->id) {
+            $group->delete();
+            $request->session()->flash('status', 'Group deleted!');
+            return redirect()->route('groups.index');
+        }
+        else {
+            $request->session()->flash('status', 'You don\'t have permission to delete this group.');
+            return redirect()->route('groups.index');            
+        }
+
     }
 }
