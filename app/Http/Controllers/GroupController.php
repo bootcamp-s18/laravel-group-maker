@@ -93,7 +93,20 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
-        return "I should display an edit form now!";
+        $group = \App\Group::find($id);
+
+        if ( old('_token') ) {
+            $group->name = old('groupName');
+            $group->description = old('groupDescription');
+            $group->activity_id = old('activityId');
+            $group->max_members = old('maxMembers');
+            $group->is_private = old('isPrivate') ? '1' : '0';
+            $group->is_virtual = old('isVirtual') ? '1' : '0';
+            $group->is_accepting_members = (old('isAcceptingMembers')) ? '1' : '0';
+        }
+
+        $activities = \App\Activity::orderBy('name')->get();
+        return view('groups.edit', compact('group', 'activities'));
     }
 
     /**
@@ -105,7 +118,26 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "I should update a record now!";
+        $validatedData = $request->validate([
+            'groupName' => 'required|unique:groups,name,' . $id,
+            'groupDescription' => 'required',
+            'activityId' => 'required|exists:activities,id',
+            'maxMembers' => 'min:1|max:100'
+        ]);
+
+        $input = $request->input();
+        $group = \App\Group::find($id);
+        $group->name = $input['groupName'];
+        $group->description = $input['groupDescription'];
+        $group->activity_id = $input['activityId'];
+        $group->max_members = $input['maxMembers'];
+        $group->is_private = (array_key_exists('isPrivate', $input)) ? '1' : '0';
+        $group->is_virtual = (array_key_exists('isVirtual', $input)) ? '1' : '0';
+        $group->is_accepting_members = (array_key_exists('isAcceptingMembers', $input)) ? '1' : '0';
+        $group->save();
+        $request->session()->flash('status', 'Group updated!');
+        return redirect()->route('groups.index');
+
     }
 
     /**
