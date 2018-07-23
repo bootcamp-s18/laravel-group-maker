@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 class SettingController extends Controller
 {
     public function index() {
-    	$settings = \App\SiteSettings::first();
-    	if (!$settings) {
-	    	$settings = new \App\SiteSettings;
-    	}
-    	return view('settings.index', compact('settings'));
+
+    	if (\Auth::user()->is_admin) {
+	    	$settings = \App\SiteSettings::first();
+	    	if (!$settings) {
+		    	$settings = new \App\SiteSettings;
+	    	}
+	    	return view('settings.index', compact('settings'));
+	    }
+
+    	return redirect()->route('home');
+
     }
 
     public function store(Request $request) {

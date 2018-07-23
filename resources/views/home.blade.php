@@ -19,7 +19,9 @@
 
     <h2>My Groups</h2>
     <ul>
+        @if (\Auth::user()->is_admin  || $settings->users_can_create_groups)
         <li><a href="/groups/create">Create a Group</a></li>
+        @endif
         <li><a href="/groups">Manage Groups</a></li>
     </ul>
 

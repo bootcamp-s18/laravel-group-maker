@@ -39,8 +39,16 @@ class GroupController extends Controller
     public function create()
     {
         $settings = \App\SiteSettings::first();
-        $activities = \App\Activity::orderBy('name')->get();
-        return view('groups.create', compact('activities', 'settings'));
+
+        if ( $settings->users_can_create_groups || \Auth::user()->is_admin ) {
+
+            $settings = \App\SiteSettings::first();
+            $activities = \App\Activity::orderBy('name')->get();
+            return view('groups.create', compact('activities', 'settings'));
+
+        }
+
+        return redirect()->route('home');
     }
 
     /**
@@ -51,31 +59,41 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+
         $settings = \App\SiteSettings::first();
-        $min = $settings->min_group_members;
-        $max = $settings->max_group_members;
 
-        $validatedData = $request->validate([
-            'groupName' => 'required|unique:groups,name',
-            'groupDescription' => 'required',
-            'activityId' => 'required|exists:activities,id',
-            'maxMembers' => 'required|integer|between:' . $settings->min_group_members . ',' . $settings->max_group_members
-        ]);
+        if ( $settings->users_can_create_groups || \Auth::user()->is_admin ) {
 
-        $input = $request->input();
-        $group = new \App\Group;
-        $group->name = $input['groupName'];
-        $group->description = $input['groupDescription'];
-        $group->creator_id = \Auth::user()->id;
-        $group->activity_id = $input['activityId'];
-        $group->max_members = $input['maxMembers'];
-        $group->is_private = (array_key_exists('isPrivate', $input)) ? '1' : '0';
-        $group->is_virtual = (array_key_exists('isVirtual', $input)) ? '1' : '0';
-        $group->is_accepting_members = (array_key_exists('isAcceptingMembers', $input)) ? '1' : '0';
-        $group->invitation_key = \Uuid::generate();
-        $group->save();
-        $request->session()->flash('status', 'Group created!');
-        return redirect()->route('groups.index');
+            $settings = \App\SiteSettings::first();
+            $min = $settings->min_group_members;
+            $max = $settings->max_group_members;
+
+            $validatedData = $request->validate([
+                'groupName' => 'required|unique:groups,name',
+                'groupDescription' => 'required',
+                'activityId' => 'required|exists:activities,id',
+                'maxMembers' => 'required|integer|between:' . $settings->min_group_members . ',' . $settings->max_group_members
+            ]);
+
+            $input = $request->input();
+            $group = new \App\Group;
+            $group->name = $input['groupName'];
+            $group->description = $input['groupDescription'];
+            $group->creator_id = \Auth::user()->id;
+            $group->activity_id = $input['activityId'];
+            $group->max_members = $input['maxMembers'];
+            $group->is_private = (array_key_exists('isPrivate', $input)) ? '1' : '0';
+            $group->is_virtual = (array_key_exists('isVirtual', $input)) ? '1' : '0';
+            $group->is_accepting_members = (array_key_exists('isAcceptingMembers', $input)) ? '1' : '0';
+            $group->invitation_key = \Uuid::generate();
+            $group->save();
+            $request->session()->flash('status', 'Group created!');
+            return redirect()->route('groups.index');
+
+        }
+
+        return redirect()->route('home');
+
     }
 
     /**
