@@ -21,7 +21,7 @@
 
 		<div class="form-group">
 			<label for="maxMembers">Maximum Number of Members</label>
-			<input type="number" max="100" min="1" class="form-control" name="maxMembers" id="maxMembers" value="{{ old('maxMembers') }}">
+			<input type="number" max="{{ $settings->max_group_members }}" min="{{ $settings->min_group_members }}" class="form-control" name="maxMembers" id="maxMembers" value="{{ old('maxMembers') }}">
 		</div>
 
 		<div class="form-group">
@@ -53,7 +53,7 @@
 		</div>
 
 
-		<a href="/activities" class="btn btn-secondary">Cancel</a>
+		<a href="/groups" class="btn btn-secondary">Cancel</a>
 		<button class="btn btn-primary" type="submit">Save</button>
 
 	</form>

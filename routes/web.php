@@ -24,6 +24,9 @@ Route::resource('/activities', 'ActivityController')->middleware('settings');
 Route::resource('/groups', 'GroupController')->middleware('settings');
 
 Route::get('/settings', 'SettingController@index');
+Route::post('/settings', 'SettingController@store');
+Route::put('/settings/{id}', 'SettingController@update');
+Route::patch('/settings/{id}', 'SettingController@update');
 
 Route::get('/not_configured', 'SettingController@not_configured');
 

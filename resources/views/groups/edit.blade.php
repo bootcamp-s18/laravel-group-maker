@@ -22,7 +22,7 @@
 
 		<div class="form-group">
 			<label for="maxMembers">Maximum Number of Members</label>
-			<input type="number" max="100" min="1" class="form-control" name="maxMembers" id="maxMembers" value="{{ $group->max_members }}">
+			<input type="number" max="{{ $settings->max_group_members }}" min="{{ $settings->min_group_members }}" class="form-control" name="maxMembers" id="maxMembers" value="{{ $group->max_members }}">
 		</div>
 
 		<div class="form-group">

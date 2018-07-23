@@ -38,8 +38,9 @@ class GroupController extends Controller
      */
     public function create()
     {
+        $settings = \App\SiteSettings::first();
         $activities = \App\Activity::orderBy('name')->get();
-        return view('groups.create', compact('activities'));
+        return view('groups.create', compact('activities', 'settings'));
     }
 
     /**
@@ -50,12 +51,15 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
+        $settings = \App\SiteSettings::first();
+        $min = $settings->min_group_members;
+        $max = $settings->max_group_members;
 
         $validatedData = $request->validate([
             'groupName' => 'required|unique:groups,name',
             'groupDescription' => 'required',
             'activityId' => 'required|exists:activities,id',
-            'maxMembers' => 'min:1|max:100'
+            'maxMembers' => 'required|integer|between:' . $settings->min_group_members . ',' . $settings->max_group_members
         ]);
 
         $input = $request->input();
@@ -93,6 +97,7 @@ class GroupController extends Controller
      */
     public function edit($id)
     {
+        $settings = \App\SiteSettings::first();
         $group = \App\Group::find($id);
 
         if ( old('_token') ) {
@@ -106,7 +111,7 @@ class GroupController extends Controller
         }
 
         $activities = \App\Activity::orderBy('name')->get();
-        return view('groups.edit', compact('group', 'activities'));
+        return view('groups.edit', compact('group', 'activities', 'settings'));
     }
 
     /**
@@ -118,11 +123,13 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $settings = \App\SiteSettings::first();
+
         $validatedData = $request->validate([
             'groupName' => 'required|unique:groups,name,' . $id,
             'groupDescription' => 'required',
             'activityId' => 'required|exists:activities,id',
-            'maxMembers' => 'min:1|max:100'
+            'maxMembers' => 'required|integer|between:' . $settings->min_group_members . ',' . $settings->max_group_members
         ]);
 
         $input = $request->input();
