@@ -30,3 +30,6 @@ Route::patch('/settings/{id}', 'SettingController@update');
 
 Route::get('/not_configured', 'SettingController@not_configured');
 
+Route::get('/memberships', 'MembershipController@index')->name('memberships');
+Route::post('/memberships/{group_id}', 'MembershipController@join');
+

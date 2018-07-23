@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 class GroupController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -28,7 +38,9 @@ class GroupController extends Controller
             $group->activity_name = $group->activity()->get()[0]->name;
         }
 
-        return view('groups.index', compact('groups'));
+        $settings = \App\SiteSettings::first();
+
+        return view('groups.index', compact('groups', 'settings'));
     }
 
     /**

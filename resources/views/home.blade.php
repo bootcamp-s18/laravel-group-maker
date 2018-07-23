@@ -28,7 +28,7 @@
 
     <h2>My Memberships</h2>
     <ul>
-        <li><a href="#">Find a Group</a></li>
+        <li><a href="/memberships">Find a Group</a></li>
         <li><a href="#">Join a Private Group</a></li>
         <li><a href="#">Leave a Group</a></li>
     </ul>

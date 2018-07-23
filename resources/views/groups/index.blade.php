@@ -6,6 +6,10 @@
 
 @section('card-body')
 
-<groups-table :groups-data='{{ $groups->toJson() }}' :current-user-id="{{ Auth::user()->id }}"></groups-table>
+@if (\Auth::user()->is_admin  || $settings->users_can_create_groups)
+	<p><a href="/groups/create">Create a Group</a></p>
+@endif
+
+<groups-table purpose="manage" :groups-data='{{ $groups->toJson() }}' :current-user-id="{{ Auth::user()->id }}"></groups-table>
 
 @endsection

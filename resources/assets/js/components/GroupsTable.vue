@@ -24,7 +24,7 @@
                     <td>{{ group.activity_name }}</td>
                     <td>{{ group.number_of_members }}</td>
                     <td>{{ group.max_members}}</td>
-                    <td>
+                    <td v-if="purpose === 'manage'">
                         <div class="row">
                             <div class="col-xs-auto">
                                 <button class="btn btn-sm" v-if="group.creator_id == currentUserId"><a :href="'/groups/' + group.id + '/edit'"><i class="fas fa-pencil-alt text-info"></i></a></button>
@@ -39,6 +39,19 @@
                             </div>
                         </div>
                     </td>
+                    <td v-else-if="purpose === 'join'">
+                        <div class="row">
+                            <div class="col-xs-auto">
+                                <form method="post" :action="'/memberships/' + group.id">
+                                    <input type="hidden" name="_token" :value="csrf">
+                                    <button class="btn btn-sm" type="submit"><i class="fas fa-sign-in-alt text-success"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                    <td v-else>
+                        <div class="row"></div>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -48,7 +61,7 @@
 <script>
     export default {
 
-        props: ['groupsData', 'currentUserId'],
+        props: ['groupsData', 'currentUserId', 'purpose'],
 
         data: () => ({
             searchString: '',
