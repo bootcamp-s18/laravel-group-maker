@@ -150,7 +150,14 @@ class GroupController extends Controller
     {
         $group = \App\Group::find($id);
         if (\Auth::user()->is_admin || $group->creator_id == \Auth::user()->id) {
+
+            // Delete all memberships in this group
+
+
+            // Delete the group
             $group->delete();
+
+            // Let the user know the group was deleted
             $request->session()->flash('status', 'Group deleted!');
             return redirect()->route('groups.index');
         }

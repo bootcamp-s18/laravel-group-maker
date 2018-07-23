@@ -17,10 +17,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('settings');
 
-Route::resource('/activities', 'ActivityController');
+Route::resource('/activities', 'ActivityController')->middleware('settings');
 
-Route::resource('/groups', 'GroupController');
+Route::resource('/groups', 'GroupController')->middleware('settings');
 
+Route::get('/settings', 'SettingController@index');
+
+Route::get('/not_configured', 'SettingController@not_configured');
 
