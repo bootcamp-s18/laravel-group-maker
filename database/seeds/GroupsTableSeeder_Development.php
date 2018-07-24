@@ -21,7 +21,7 @@ class GroupsTableSeeder_Development extends Seeder
 		$dnd = \App\Activity::where('name', '=', 'Dungeons & Dragons')->first();
     $knitting = \App\Activity::where('name', '=', 'Knitting')->first();
     $soccer = \App\Activity::where('name', '=', 'Soccer')->first();
-
+    $film = \App\Activity::where('name', '=', 'Film')->first();
 
 		// Creators
 		$aaron = \App\User::where('name', '=', 'Aaron')->first();
@@ -31,7 +31,7 @@ class GroupsTableSeeder_Development extends Seeder
 		$ursula = \App\User::where('name', '=', 'Ursula')->first();
     $kevin = \App\User::where('name', '=', 'Kevin')->first();
     $chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
-
+    $kar = \App\User::where('name', '=', 'Kar')->first();
 
 		// Participants
 		$beth = \App\User::where('name', '=', 'Beth')->first();
@@ -72,6 +72,22 @@ class GroupsTableSeeder_Development extends Seeder
         'default_lon' => -84.5458872
     	]);
 
+      DB::table('groups')->insert([
+    		'name' => 'Kar\'s Film Junkies',
+    		'description' => 'We watch QUALITY movies while turning our noses up at mainstream cinema',
+    		'creator_id' => $kar->id,
+    		'activity_id' => $film->id,
+    		'is_private' => 0,
+    		'is_accepting_members' => 0,
+    		'max_members' => 9,
+    		'is_virtual' => 0,
+    		'invitation_key' => Uuid::generate(),
+        'default_lat' => 37.80923,
+        'default_lon' => -85.4669
+    		'created_at' => Carbon::now(),
+    		'updated_at' => Carbon::now(),
+    	]);
+
 
     	// Find the group we just created.
     	$group1 = \App\Group::where('name', '=', 'Aaron\'s Wednesday Card Game')->first();
@@ -101,6 +117,7 @@ class GroupsTableSeeder_Development extends Seeder
     		'created_at' => Carbon::now(),
     		'updated_at' => Carbon::now()
        	]);
+
 
 
     	// Group #2 - a private group that's looking for a player, with creator as participant.
