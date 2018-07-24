@@ -20,6 +20,8 @@ class GroupsTableSeeder_Development extends Seeder
 		$monopoly = \App\Activity::where('name', '=', 'Monopoly')->first();
 		$dnd = \App\Activity::where('name', '=', 'Dungeons & Dragons')->first();
     $knitting = \App\Activity::where('name', '=', 'Knitting')->first();
+    $soccer = \App\Activity::where('name', '=', 'Soccer')->first();
+
 
 		// Creators
 		$aaron = \App\User::where('name', '=', 'Aaron')->first();
@@ -28,6 +30,8 @@ class GroupsTableSeeder_Development extends Seeder
 		$opie = \App\User::where('name', '=', 'Opie')->first();
 		$ursula = \App\User::where('name', '=', 'Ursula')->first();
     $kevin = \App\User::where('name', '=', 'Kevin')->first();
+    $chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
+
 
 		// Participants
 		$beth = \App\User::where('name', '=', 'Beth')->first();
@@ -118,6 +122,33 @@ class GroupsTableSeeder_Development extends Seeder
     	$group2->members()->attach($chris->id);
     	$group2->members()->attach(\App\User::where('name', '=', 'Ginny')->first()->id);
 
+
+
+
+        // Chris B's group
+        $groupChris = new \App\Group;
+    	$groupChris->name = 'Woodland Soccer Club';
+    	$groupChris->description = 'Soccer at Woodland Park';
+    	$groupChris->creator_id = $chrisBrowder->id;
+    	$groupChris->activity_id = $soccer->id;
+    	$groupChris->is_private = 0;
+    	$groupChris->is_accepting_members = 1;
+    	$groupChris->max_members = 22;
+    	$groupChris->is_virtual = 0;
+    	$groupChris->invitation_key = Uuid::generate();
+    	$groupChris->save();
+
+    	// Add members to Chris B's group
+    	$groupChris->members()->attach($erik->id);
+    	$groupChris->members()->attach($chris->id);
+        $groupChris->members()->attach($beth->id);
+        $groupChris->members()->attach($dennis->id);
+        $groupChris->members()->attach($ursula->id);
+        $groupChris->members()->attach($ian->id);
+        $groupChris->members()->attach($aaron->id);
+        $groupChris->members()->attach($chrisBrowder->id);
+        $groupChris->members()->attach($opie->id);
+    	$groupChris->members()->attach(\App\User::where('name', '=', 'Ginny')->first()->id);
 
     }
 }
