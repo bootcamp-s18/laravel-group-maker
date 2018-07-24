@@ -30,7 +30,6 @@
     <ul>
         <li><a href="/memberships">Find a Group</a></li>
         <li><a href="#">Join a Private Group</a></li>
-        <li><a href="#">Leave a Group</a></li>
     </ul>
 
 @endsection

@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 Vue.component('activities-table', require('./components/ActivitiesTable.vue'));
 Vue.component('groups-table', require('./components/GroupsTable.vue'));
+Vue.component('location-selector', require('./components/LocationSelector.vue'));
 
 const app = new Vue({
     el: '#app'
