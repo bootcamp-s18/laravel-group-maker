@@ -43,11 +43,25 @@ class ActivitiesTableSeeder_Development extends Seeder
     	]);
 
       DB::table('activities')->insert([
-    		'name' => 'Film',
-    		'description' => 'We watch movies',
-    		'created_at' => Carbon::now(),
+    		'name' => 'Knitting',
+    		'description' => 'A crafting hobby involving weaving thread to create garments',
+        'created_at' => Carbon::now(),
     		'updated_at' => Carbon::now()
     	]);
+
+      DB::table('activities')->insert([
+    		'name' => 'Soccer',
+    		'description' => 'Come play pick-up soccer!',
+    		'created_at' => Carbon::now(),
+    		'updated_at' => Carbon::now()
+  	   ]);
+
+      DB::table('activities')->insert([
+        'name' => 'Film',
+        'description' => 'We watch movies',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now()
+      ]);
 
     }
 }

@@ -19,6 +19,8 @@ class GroupsTableSeeder_Development extends Seeder
 		$baseball = \App\Activity::where('name', '=', 'Baseball')->first();
 		$monopoly = \App\Activity::where('name', '=', 'Monopoly')->first();
 		$dnd = \App\Activity::where('name', '=', 'Dungeons & Dragons')->first();
+    $knitting = \App\Activity::where('name', '=', 'Knitting')->first();
+    $soccer = \App\Activity::where('name', '=', 'Soccer')->first();
     $film = \App\Activity::where('name', '=', 'Film')->first();
 
 		// Creators
@@ -27,6 +29,8 @@ class GroupsTableSeeder_Development extends Seeder
 		$ian = \App\User::where('name', '=', 'Ian')->first();
 		$opie = \App\User::where('name', '=', 'Opie')->first();
 		$ursula = \App\User::where('name', '=', 'Ursula')->first();
+    $kevin = \App\User::where('name', '=', 'Kevin')->first();
+    $chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
     $kar = \App\User::where('name', '=', 'Kar')->first();
 
 		// Participants
@@ -53,6 +57,22 @@ class GroupsTableSeeder_Development extends Seeder
     	]);
 
       DB::table('groups')->insert([
+    		'name' => 'Kevin\'s Knitting Circle',
+    		'description' => 'We knit socks for possums',
+    		'creator_id' => $kevin->id,
+    		'activity_id' => $knitting->id,
+    		'is_private' => 0,
+    		'is_accepting_members' => 0,
+    		'max_members' => 4,
+    		'is_virtual' => 0,
+    		'invitation_key' => Uuid::generate(),
+    		'created_at' => Carbon::now(),
+    		'updated_at' => Carbon::now(),
+        'default_lat' => 38.039189,
+        'default_lon' => -84.5458872
+    	]);
+
+      DB::table('groups')->insert([
     		'name' => 'Kar\'s Film Junkies',
     		'description' => 'We watch QUALITY movies while turning our noses up at mainstream cinema',
     		'creator_id' => $kar->id,
@@ -67,6 +87,7 @@ class GroupsTableSeeder_Development extends Seeder
     		'created_at' => Carbon::now(),
     		'updated_at' => Carbon::now(),
     	]);
+
 
     	// Find the group we just created.
     	$group1 = \App\Group::where('name', '=', 'Aaron\'s Wednesday Card Game')->first();
@@ -118,6 +139,33 @@ class GroupsTableSeeder_Development extends Seeder
     	$group2->members()->attach($chris->id);
     	$group2->members()->attach(\App\User::where('name', '=', 'Ginny')->first()->id);
 
+
+
+
+        // Chris B's group
+        $groupChris = new \App\Group;
+    	$groupChris->name = 'Woodland Soccer Club';
+    	$groupChris->description = 'Soccer at Woodland Park';
+    	$groupChris->creator_id = $chrisBrowder->id;
+    	$groupChris->activity_id = $soccer->id;
+    	$groupChris->is_private = 0;
+    	$groupChris->is_accepting_members = 1;
+    	$groupChris->max_members = 22;
+    	$groupChris->is_virtual = 0;
+    	$groupChris->invitation_key = Uuid::generate();
+    	$groupChris->save();
+
+    	// Add members to Chris B's group
+    	$groupChris->members()->attach($erik->id);
+    	$groupChris->members()->attach($chris->id);
+        $groupChris->members()->attach($beth->id);
+        $groupChris->members()->attach($dennis->id);
+        $groupChris->members()->attach($ursula->id);
+        $groupChris->members()->attach($ian->id);
+        $groupChris->members()->attach($aaron->id);
+        $groupChris->members()->attach($chrisBrowder->id);
+        $groupChris->members()->attach($opie->id);
+    	$groupChris->members()->attach(\App\User::where('name', '=', 'Ginny')->first()->id);
 
     }
 }
