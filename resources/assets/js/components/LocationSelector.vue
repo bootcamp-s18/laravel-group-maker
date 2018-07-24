@@ -14,8 +14,8 @@
 	        		<span>{{ acceptedAddress }}</span>
 	        	</div>
 	        	<div class="mt-2">
-	        		<input type="hidden" name="acceptedLat" :value="acceptedLat">
-	        		<input type="hidden" name="acceptedLon" :value="acceptedLon">
+	        		<input type="hidden" name="accepted_lat" :value="acceptedLat">
+	        		<input type="hidden" name="accepted_lon" :value="acceptedLon">
 			    	<button type="button" class="btn btn-sm btn-secondary ml-2" v-on:click="rejectLocation">Cancel</button>
 			    </div>
 			</div>

@@ -48590,12 +48590,12 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "mt-2" }, [
                   _c("input", {
-                    attrs: { type: "hidden", name: "acceptedLat" },
+                    attrs: { type: "hidden", name: "accepted_lat" },
                     domProps: { value: _vm.acceptedLat }
                   }),
                   _vm._v(" "),
                   _c("input", {
-                    attrs: { type: "hidden", name: "acceptedLon" },
+                    attrs: { type: "hidden", name: "accepted_lon" },
                     domProps: { value: _vm.acceptedLon }
                   }),
                   _vm._v(" "),
