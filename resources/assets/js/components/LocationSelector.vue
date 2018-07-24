@@ -1,14 +1,14 @@
 <template>
 
-	<div class="form-group row">
+	<div class="form-group" :class="extraClasses[format].parentDivClasses">
 
 
 
 		<!-- location accepted by user -->
 
-		<label v-if="show == 'confirmed'" for="location-selectorCCCC" class="col-md-4 col-form-label text-md-right">Location (accepted by user)</label>
+		<label v-if="show == 'confirmed'" for="location-selectorCCCC" :class="extraClasses[format].labelClasses">Location</label>
 
-        <div v-if="show == 'confirmed'" class="col-md-6" id="location-selectorCCCC">
+        <div v-if="show == 'confirmed'" :class="extraClasses[format].nonLabelClasses" id="location-selectorCCCC">
         	<div class="border border-success p-3 text-center">
 	        	<div class="">
 	        		<span>{{ acceptedAddress }}</span>
@@ -24,9 +24,9 @@
 
         <!-- asking user to accept or reject google's suggestion -->
 
-		<label v-if="show == 'unconfirmed'" for="location-selectorAAAA" class="col-md-4 col-form-label text-md-right">Location (suggested by Google)</label>
+		<label v-if="show == 'unconfirmed'" for="location-selectorAAAA" :class="extraClasses[format].labelClasses">Location</label>
 
-        <div v-if="show == 'unconfirmed'" class="col-md-6" id="location-selectorAAAA">
+        <div v-if="show == 'unconfirmed'" :class="extraClasses[format].nonLabelClasses" id="location-selectorAAAA">
         	<div class="border border-success p-3 text-center">
 	        	<div class="">
 	        		<span>{{ formattedAddress }}</span>
@@ -45,9 +45,9 @@
 
         <!-- prompting user for input -->
 
-		<label v-if="show == 'input'" for="location-selectorBBBB" class="col-md-4 col-form-label text-md-right">Location</label>
+		<label v-if="show == 'input'" for="location-selectorBBBB" :class="extraClasses[format].labelClasses">Location</label>
 
-        <div v-if="show == 'input'" class="col-md-6">
+        <div v-if="show == 'input'" :class="extraClasses[format].nonLabelClasses">
             <input v-on:keydown.enter.prevent='sendToApi' id="location-selectorBBBB" type="text" class="form-control" name="location-selector" v-model="locationFragment">
         </div>
 
@@ -74,7 +74,27 @@ export default {
         formattedAddress: '',
         acceptedAddress: '',
         acceptedLat: '',
-        acceptedLon: ''
+        acceptedLon: '',
+
+        extraClasses: {
+
+        	horizontal: {
+
+        		parentDivClasses: 'row',
+        		labelClasses: 'col-md-4 col-form-label text-md-right',
+        		nonLabelClasses: 'col-md-6'
+
+        	},
+
+        	vertical: {
+
+        		parentDivClasses: '',
+        		labelClasses: '',
+        		nonLabelClasses: ''
+
+        	}
+
+        }
 
     }),
 
