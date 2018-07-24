@@ -19,9 +19,10 @@ class GroupsTableSeeder_Development extends Seeder
 		$baseball = \App\Activity::where('name', '=', 'Baseball')->first();
 		$monopoly = \App\Activity::where('name', '=', 'Monopoly')->first();
 		$dnd = \App\Activity::where('name', '=', 'Dungeons & Dragons')->first();
-    $knitting = \App\Activity::where('name', '=', 'Knitting')->first();
-    $soccer = \App\Activity::where('name', '=', 'Soccer')->first();
-    $film = \App\Activity::where('name', '=', 'Film')->first();
+		$knitting = \App\Activity::where('name', '=', 'Knitting')->first();
+		$soccer = \App\Activity::where('name', '=', 'Soccer')->first();
+		$film = \App\Activity::where('name', '=', 'Film')->first();
+		$underWaterBasketWeaving = \App\Activity::where('name', '=', 'Under Water Basket Weaving')->first();
 
 		// Creators
 		$aaron = \App\User::where('name', '=', 'Aaron')->first();
@@ -29,9 +30,10 @@ class GroupsTableSeeder_Development extends Seeder
 		$ian = \App\User::where('name', '=', 'Ian')->first();
 		$opie = \App\User::where('name', '=', 'Opie')->first();
 		$ursula = \App\User::where('name', '=', 'Ursula')->first();
-    $kevin = \App\User::where('name', '=', 'Kevin')->first();
-    $chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
-    $kar = \App\User::where('name', '=', 'Kar')->first();
+		$kevin = \App\User::where('name', '=', 'Kevin')->first();
+		$chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
+		$kar = \App\User::where('name', '=', 'Kar')->first();
+		$erik2 = \App\User::where('name', '=', 'Erik Wolfe')->first();
 
 		// Participants
 		$beth = \App\User::where('name', '=', 'Beth')->first();
@@ -56,7 +58,7 @@ class GroupsTableSeeder_Development extends Seeder
     		'updated_at' => Carbon::now()
     	]);
 
-      DB::table('groups')->insert([
+      	DB::table('groups')->insert([
     		'name' => 'Kevin\'s Knitting Circle',
     		'description' => 'We knit socks for possums',
     		'creator_id' => $kevin->id,
@@ -68,11 +70,27 @@ class GroupsTableSeeder_Development extends Seeder
     		'invitation_key' => Uuid::generate(),
     		'created_at' => Carbon::now(),
     		'updated_at' => Carbon::now(),
-        'default_lat' => 38.039189,
-        'default_lon' => -84.5458872
+			'default_lat' => 38.039189,
+			'default_lon' => -84.5458872
+		]);
+		
+		DB::table('groups')->insert([
+    		'name' => 'Erik\'s Under Water Basket Weaving Group',
+    		'description' => 'Once a year we all go to Ocracoke Island off the shore from North Carolina and wade amongst the fishies whilst we make our spirit baskets. These baskets represent our heart and soul and once we are finished we cast them out in the ocean with our worries and troubles.',
+    		'creator_id' => $erik2->id,
+    		'activity_id' => $underWaterBasketWeaving->id,
+    		'is_private' => 0,
+    		'is_accepting_members' => 0,
+    		'max_members' => 80,
+    		'is_virtual' => 1,
+    		'invitation_key' => Uuid::generate(),
+    		'created_at' => Carbon::now(),
+    		'updated_at' => Carbon::now(),
+			'default_lat' => 35.1146,
+			'default_lon' => 75.9810
     	]);
 
-      DB::table('groups')->insert([
+      	DB::table('groups')->insert([
     		'name' => 'Kar\'s Film Junkies',
     		'description' => 'We watch QUALITY movies while turning our noses up at mainstream cinema',
     		'creator_id' => $kar->id,
@@ -82,8 +100,8 @@ class GroupsTableSeeder_Development extends Seeder
     		'max_members' => 9,
     		'is_virtual' => 0,
     		'invitation_key' => Uuid::generate(),
-        'default_lat' => 37.80923,
-        'default_lon' => -85.4669
+			'default_lat' => 37.80923,
+			'default_lon' => -85.4669,
     		'created_at' => Carbon::now(),
     		'updated_at' => Carbon::now(),
     	]);
