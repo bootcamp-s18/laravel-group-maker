@@ -62,7 +62,7 @@
                         </div>
 
 
-                        <location-selector></location-selector>
+                        <location-selector format="horizontal"></location-selector>
 
 
                         <div class="form-group row mb-0">

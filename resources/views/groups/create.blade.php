@@ -52,6 +52,7 @@
 			<label class="form-check-label" for="isVirtualFlag">This is a virtual group</label>
 		</div>
 
+		<location-selector format="vertical"></location-selector>
 
 		<a href="/groups" class="btn btn-secondary">Cancel</a>
 		<button class="btn btn-primary" type="submit">Save</button>

@@ -67,8 +67,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'default_lat' => $data['accepted_lat'],
-            'default_lon' => $data['accepted_lon']
+            'default_lat' => array_key_exists('accepted_lat', $data) ? $data['accepted_lat'] : null,
+            'default_lon' => array_key_exists('accepted_lon', $data) ? $data['accepted_lon'] : null
         ]);
     }
 }

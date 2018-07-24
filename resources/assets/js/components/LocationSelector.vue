@@ -16,7 +16,7 @@
 	        	<div class="mt-2">
 	        		<input type="hidden" name="accepted_lat" :value="acceptedLat">
 	        		<input type="hidden" name="accepted_lon" :value="acceptedLon">
-			    	<button type="button" class="btn btn-sm btn-secondary ml-2" v-on:click="rejectLocation">Cancel</button>
+			    	<button type="button" class="btn btn-sm btn-secondary ml-2" v-on:click="rejectLocation">Undo</button>
 			    </div>
 			</div>
         </div>
@@ -35,6 +35,9 @@
 			    	<button type="button" class="btn btn-sm btn-success" v-on:click="acceptLocation">Accept Location</button>
 			    	<button type="button" class="btn btn-sm btn-secondary ml-2" v-on:click="rejectLocation">Cancel</button>
 			    </div>
+			    <div class="mt-1">
+			    	<span class="text-black-50 small"><em>Location will not be saved unless you accept it!</em></span>
+			    </div>
 			</div>
         </div>
 
@@ -45,7 +48,7 @@
 		<label v-if="show == 'input'" for="location-selectorBBBB" class="col-md-4 col-form-label text-md-right">Location</label>
 
         <div v-if="show == 'input'" class="col-md-6">
-            <input v-on:keydown.enter.prevent='sendToApi' id="location-selectorBBBB" type="text" class="form-control" name="location-selector" v-model="locationFragment" required>
+            <input v-on:keydown.enter.prevent='sendToApi' id="location-selectorBBBB" type="text" class="form-control" name="location-selector" v-model="locationFragment">
         </div>
 
 
@@ -60,6 +63,8 @@
 
 export default {
 	
+	props: ['format'],
+
 	data: () => ({
 
 		show: 'input',
@@ -150,9 +155,11 @@ export default {
 
     	rejectLocation: function() {
 
-    		// Remove previously accepted location, if there was one, and 
+    		// Remove previously accepted lat and lon and 
     		// display input form again
 
+    		this.acceptedLat = '';
+    		this.acceptedLon = '';
     		this.show = 'input';
 
     	}
