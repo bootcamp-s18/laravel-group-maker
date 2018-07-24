@@ -31,7 +31,12 @@ class MembershipController extends Controller
             $group->activity_name = $group->activity()->get()[0]->name;
         }
 
-    	return view('memberships.index', compact('groups'));
+        $my_joined_groups = [];
+        foreach (\Auth::user()->groups_joined()->get() as $my_group) {
+        	array_push($my_joined_groups, $my_group->id);
+        }
+
+    	return view('memberships.index', compact('groups', 'my_joined_groups'));
 
     }
 
@@ -40,17 +45,24 @@ class MembershipController extends Controller
     	$group = \App\Group::find($group_id);
     	$group->members()->syncWithoutDetaching([\Auth::user()->id]);
 
-    	if ($group->members()->count >= $group->max_members) {
+    	if ($group->members()->count() >= $group->max_members) {
     		$group->is_accepting_members = false;
     		$group->save();
     	}
 
-        $request->session()->flash('status', 'Group joined!');
+        $request->session()->flash('status', 'You joined the group!');
         return redirect()->route('memberships');
 
     }
 
+    public function leave(Request $request, $group_id) {
 
+    	$group = \App\Group::find($group_id);
+    	$group->members()->detach(\Auth::user()->id);
 
+        $request->session()->flash('status', 'You left the group!');
+        return redirect()->route('memberships');
+
+    }
 
 }

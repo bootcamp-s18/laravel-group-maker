@@ -10,6 +10,6 @@
 	<p><a href="/groups/create">Create a Group</a></p>
 @endif
 
-<groups-table purpose="manage" :groups-data='{{ $groups->toJson() }}' :current-user-id="{{ Auth::user()->id }}"></groups-table>
+<groups-table purpose="manage" :current-users-groups='{{ json_encode($my_joined_groups) }}' :groups-data='{{ $groups->toJson() }}' :current-user-id="{{ Auth::user()->id }}"></groups-table>
 
 @endsection

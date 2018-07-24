@@ -40,7 +40,12 @@ class GroupController extends Controller
 
         $settings = \App\SiteSettings::first();
 
-        return view('groups.index', compact('groups', 'settings'));
+        $my_joined_groups = [];
+        foreach (\Auth::user()->groups_joined()->get() as $my_group) {
+            array_push($my_joined_groups, $my_group->id);
+        }
+
+        return view('groups.index', compact('groups', 'settings', 'my_joined_groups'));
     }
 
     /**

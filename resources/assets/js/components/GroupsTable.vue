@@ -40,12 +40,20 @@
                         </div>
                     </td>
                     <td v-else-if="purpose === 'join'">
-                        <div class="row">
-                            <div class="col-xs-auto">
-                                <form method="post" :action="'/memberships/' + group.id">
+                        <div class="row justify-content-center">
+                            <div class="col-auto justify-content-center">
+
+                                <form v-if="currentUsersGroups.includes(group.id)" method="post" :action="'/memberships/' + group.id">
+                                    <input type="hidden" name="_token" :value="csrf">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-sm" type="submit"><i class="fas fa-sign-out-alt text-danger"></i></button>
+                                </form>
+
+                                <form v-else method="post" :action="'/memberships/' + group.id">
                                     <input type="hidden" name="_token" :value="csrf">
                                     <button class="btn btn-sm" type="submit"><i class="fas fa-sign-in-alt text-success"></i></button>
                                 </form>
+
                             </div>
                         </div>
                     </td>
@@ -61,7 +69,7 @@
 <script>
     export default {
 
-        props: ['groupsData', 'currentUserId', 'purpose'],
+        props: ['groupsData', 'currentUserId', 'purpose', 'currentUsersGroups'],
 
         data: () => ({
             searchString: '',

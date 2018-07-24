@@ -47665,10 +47665,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['groupsData', 'currentUserId', 'purpose'],
+    props: ['groupsData', 'currentUserId', 'purpose', 'currentUsersGroups'],
 
     data: function data() {
         return {
@@ -47824,26 +47832,56 @@ var render = function() {
                 ])
               : _vm.purpose === "join"
                 ? _c("td", [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-xs-auto" }, [
-                        _c(
-                          "form",
-                          {
-                            attrs: {
-                              method: "post",
-                              action: "/memberships/" + group.id
-                            }
-                          },
-                          [
-                            _c("input", {
-                              attrs: { type: "hidden", name: "_token" },
-                              domProps: { value: _vm.csrf }
-                            }),
-                            _vm._v(" "),
-                            _vm._m(2, true)
-                          ]
-                        )
-                      ])
+                    _c("div", { staticClass: "row justify-content-center" }, [
+                      _c(
+                        "div",
+                        { staticClass: "col-auto justify-content-center" },
+                        [
+                          _vm.currentUsersGroups.includes(group.id)
+                            ? _c(
+                                "form",
+                                {
+                                  attrs: {
+                                    method: "post",
+                                    action: "/memberships/" + group.id
+                                  }
+                                },
+                                [
+                                  _c("input", {
+                                    attrs: { type: "hidden", name: "_token" },
+                                    domProps: { value: _vm.csrf }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    attrs: {
+                                      type: "hidden",
+                                      name: "_method",
+                                      value: "DELETE"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _vm._m(2, true)
+                                ]
+                              )
+                            : _c(
+                                "form",
+                                {
+                                  attrs: {
+                                    method: "post",
+                                    action: "/memberships/" + group.id
+                                  }
+                                },
+                                [
+                                  _c("input", {
+                                    attrs: { type: "hidden", name: "_token" },
+                                    domProps: { value: _vm.csrf }
+                                  }),
+                                  _vm._v(" "),
+                                  _vm._m(3, true)
+                                ]
+                              )
+                        ]
+                      )
                     ])
                   ])
                 : _c("td", [_c("div", { staticClass: "row" })])
@@ -47882,6 +47920,16 @@ var staticRenderFns = [
       "button",
       { staticClass: "btn btn-sm", attrs: { type: "submit" } },
       [_c("i", { staticClass: "far fa-trash-alt text-danger" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-sm", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "fas fa-sign-out-alt text-danger" })]
     )
   },
   function() {
