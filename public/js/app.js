@@ -48130,7 +48130,7 @@ exports = module.exports = __webpack_require__(48)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48430,6 +48430,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -48437,17 +48465,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
 
-      showResults: false,
-      locationFragment: 'cheese'
+      show: 'input',
+      locationFragment: ''
 
     };
   },
 
   methods: {
 
-    swapDisplay: function swapDisplay() {
-      this.showResults = !this.showResults;
-      console.log("Swapping...");
+    sendToApi: function sendToApi() {
+
+      // Run some code to consult the Google oracle
+
+      this.show = 'unconfirmed';
+    },
+
+    acceptLocation: function acceptLocation() {
+
+      // Do other code to change form if needed?
+
+      this.show = 'confirmed';
+    },
+
+    rejectLocation: function rejectLocation() {
+
+      // Remove previously accepted location, if there was one, and 
+      // display input form again
+
+      this.show = 'input';
     }
 
   }
@@ -48462,48 +48507,95 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "form-group row" }, [
-    _vm.showResults
+    _vm.show == "confirmed"
+      ? _c(
+          "label",
+          {
+            staticClass: "col-md-4 col-form-label text-md-right",
+            attrs: { for: "location-selectorCCCC" }
+          },
+          [_vm._v("Location (accepted by user)")]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.show == "confirmed"
+      ? _c(
+          "div",
+          { staticClass: "col-md-6", attrs: { id: "location-selectorCCCC" } },
+          [
+            _c(
+              "div",
+              { staticClass: "border border-success p-3 text-center" },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-2" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-secondary ml-2",
+                      attrs: { type: "button" },
+                      on: { click: _vm.rejectLocation }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.show == "unconfirmed"
       ? _c(
           "label",
           {
             staticClass: "col-md-4 col-form-label text-md-right",
             attrs: { for: "location-selectorAAAA" }
           },
-          [_vm._v("Location (From Google)")]
+          [_vm._v("Location (suggested by Google)")]
         )
       : _vm._e(),
     _vm._v(" "),
-    _vm.showResults
-      ? _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "border border-success p-3 text-center" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "mt-2" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-sm btn-success",
-                  attrs: { type: "button" },
-                  on: { click: _vm.swapDisplay }
-                },
-                [_vm._v("Confirm Location")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-sm btn-secondary ml-2",
-                  attrs: { type: "button" },
-                  on: { click: _vm.swapDisplay }
-                },
-                [_vm._v("Cancel")]
-              )
-            ])
-          ])
-        ])
+    _vm.show == "unconfirmed"
+      ? _c(
+          "div",
+          { staticClass: "col-md-6", attrs: { id: "location-selectorAAAA" } },
+          [
+            _c(
+              "div",
+              { staticClass: "border border-success p-3 text-center" },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "mt-2" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-success",
+                      attrs: { type: "button" },
+                      on: { click: _vm.acceptLocation }
+                    },
+                    [_vm._v("Accept Location")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-secondary ml-2",
+                      attrs: { type: "button" },
+                      on: { click: _vm.rejectLocation }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
       : _vm._e(),
     _vm._v(" "),
-    !_vm.showResults
+    _vm.show == "input"
       ? _c(
           "label",
           {
@@ -48514,7 +48606,7 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    !_vm.showResults
+    _vm.show == "input"
       ? _c("div", { staticClass: "col-md-6" }, [
           _c("input", {
             directives: [
@@ -48542,7 +48634,7 @@ var render = function() {
                   return null
                 }
                 $event.preventDefault()
-                return _vm.swapDisplay($event)
+                return _vm.sendToApi($event)
               },
               input: function($event) {
                 if ($event.target.composing) {
@@ -48557,6 +48649,14 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", {}, [
+      _c("span", [_vm._v("181 Sherman Ave, Lexington, KY 40502, USA")])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
