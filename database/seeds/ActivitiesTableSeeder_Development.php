@@ -13,7 +13,7 @@ class ActivitiesTableSeeder_Development extends Seeder
      */
     public function run()
     {
-     
+
     	DB::table('activities')->insert([
     		'name' => 'Euchre',
     		'description' => 'A trick-taking card game played with standard playing cards',
@@ -38,6 +38,13 @@ class ActivitiesTableSeeder_Development extends Seeder
     	DB::table('activities')->insert([
     		'name' => 'Dungeons & Dragons',
     		'description' => 'A roleplaying game set in a fantasy world',
+    		'created_at' => Carbon::now(),
+    		'updated_at' => Carbon::now()
+    	]);
+
+      DB::table('activities')->insert([
+    		'name' => 'Film',
+    		'description' => 'We watch movies',
     		'created_at' => Carbon::now(),
     		'updated_at' => Carbon::now()
     	]);
