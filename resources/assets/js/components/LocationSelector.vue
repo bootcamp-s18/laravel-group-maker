@@ -11,9 +11,11 @@
         <div v-if="show == 'confirmed'" class="col-md-6" id="location-selectorCCCC">
         	<div class="border border-success p-3 text-center">
 	        	<div class="">
-	        		<span>181 Sherman Ave, Lexington, KY 40502, USA</span>
+	        		<span>{{ acceptedAddress }}</span>
 	        	</div>
 	        	<div class="mt-2">
+	        		<input type="hidden" name="acceptedLat" :value="acceptedLat">
+	        		<input type="hidden" name="acceptedLon" :value="acceptedLon">
 			    	<button type="button" class="btn btn-sm btn-secondary ml-2" v-on:click="rejectLocation">Cancel</button>
 			    </div>
 			</div>
@@ -27,7 +29,7 @@
         <div v-if="show == 'unconfirmed'" class="col-md-6" id="location-selectorAAAA">
         	<div class="border border-success p-3 text-center">
 	        	<div class="">
-	        		<span>181 Sherman Ave, Lexington, KY 40502, USA</span>
+	        		<span>{{ formattedAddress }}</span>
 	        	</div>
 	        	<div class="mt-2">
 			    	<button type="button" class="btn btn-sm btn-success" v-on:click="acceptLocation">Accept Location</button>
@@ -61,7 +63,13 @@ export default {
 	data: () => ({
 
 		show: 'input',
-		locationFragment: ''
+		locationFragment: '',
+        apiRequest: null,
+        response: null,
+        formattedAddress: '',
+        acceptedAddress: '',
+        acceptedLat: '',
+        acceptedLon: ''
 
     }),
 
@@ -70,13 +78,72 @@ export default {
     	sendToApi: function() {
 
     		// Run some code to consult the Google oracle
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?address=<addr>";
+            url = url.replace("<addr>", this.locationFragment);
 
-    		this.show = 'unconfirmed';
+            // Code that fetches data from the API URL and stores it in results.
+            this.apiRequest = new XMLHttpRequest();
+            this.apiRequest.onload = this.onApiResponse;
+            this.apiRequest.onerror = this.onApiError;
+            this.apiRequest.open('get', url, true);
+            this.apiRequest.send();
+
     	},
+
+    	onApiError: function() {
+
+    		console.log('error accessing API!');
+
+    	},
+
+    	onApiResponse: function() {
+
+			if (this.apiRequest.status == "200") {
+
+                this.response = JSON.parse(this.apiRequest.response);
+
+                console.log(this.response);
+
+                if (this.response['error_message']) {
+
+                	alert("We got back an error.");
+                	console.log(this.response['error_message']);
+
+	        		this.show = 'input';
+
+                }
+                else if (this.response['results']) {
+
+	                this.formattedAddress = this.response.results[0].formatted_address;
+
+	                this.show = 'unconfirmed';
+                }
+                else {
+
+                	console.log("We didn't get anything we expected.");
+
+        			this.show = 'input';
+
+        		}
+
+            }
+            else {
+                
+            	console.log('response was not OK');
+
+                console.log(this.apiRequest.statusText);
+            }
+
+    	},
+
 
     	acceptLocation: function() {
 
     		// Do other code to change form if needed?
+
+    		this.acceptedAddress = this.response.results[0].formatted_address;
+    		this.acceptedLat = this.response.results[0].geometry.location.lat;
+    		this.acceptedLon = this.response.results[0].geometry.location.lng;
 
     		this.show = 'confirmed';
     	},

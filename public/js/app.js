@@ -48130,7 +48130,7 @@ exports = module.exports = __webpack_require__(48)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -48458,44 +48458,101 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-  data: function data() {
-    return {
+    data: function data() {
+        return {
 
-      show: 'input',
-      locationFragment: ''
+            show: 'input',
+            locationFragment: '',
+            apiRequest: null,
+            response: null,
+            formattedAddress: '',
+            acceptedAddress: '',
+            acceptedLat: '',
+            acceptedLon: ''
 
-    };
-  },
-
-  methods: {
-
-    sendToApi: function sendToApi() {
-
-      // Run some code to consult the Google oracle
-
-      this.show = 'unconfirmed';
+        };
     },
 
-    acceptLocation: function acceptLocation() {
+    methods: {
 
-      // Do other code to change form if needed?
+        sendToApi: function sendToApi() {
 
-      this.show = 'confirmed';
-    },
+            // Run some code to consult the Google oracle
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?address=<addr>";
+            url = url.replace("<addr>", this.locationFragment);
 
-    rejectLocation: function rejectLocation() {
+            // Code that fetches data from the API URL and stores it in results.
+            this.apiRequest = new XMLHttpRequest();
+            this.apiRequest.onload = this.onApiResponse;
+            this.apiRequest.onerror = this.onApiError;
+            this.apiRequest.open('get', url, true);
+            this.apiRequest.send();
+        },
 
-      // Remove previously accepted location, if there was one, and 
-      // display input form again
+        onApiError: function onApiError() {
 
-      this.show = 'input';
+            console.log('error accessing API!');
+        },
+
+        onApiResponse: function onApiResponse() {
+
+            if (this.apiRequest.status == "200") {
+
+                this.response = JSON.parse(this.apiRequest.response);
+
+                console.log(this.response);
+
+                if (this.response['error_message']) {
+
+                    alert("We got back an error.");
+                    console.log(this.response['error_message']);
+
+                    this.show = 'input';
+                } else if (this.response['results']) {
+
+                    this.formattedAddress = this.response.results[0].formatted_address;
+
+                    this.show = 'unconfirmed';
+                } else {
+
+                    console.log("We didn't get anything we expected.");
+
+                    this.show = 'input';
+                }
+            } else {
+
+                console.log('response was not OK');
+
+                console.log(this.apiRequest.statusText);
+            }
+        },
+
+        acceptLocation: function acceptLocation() {
+
+            // Do other code to change form if needed?
+
+            this.acceptedAddress = this.response.results[0].formatted_address;
+            this.acceptedLat = this.response.results[0].geometry.location.lat;
+            this.acceptedLon = this.response.results[0].geometry.location.lng;
+
+            this.show = 'confirmed';
+        },
+
+        rejectLocation: function rejectLocation() {
+
+            // Remove previously accepted location, if there was one, and 
+            // display input form again
+
+            this.show = 'input';
+        }
+
     }
-
-  }
 });
 
 /***/ }),
@@ -48527,9 +48584,21 @@ var render = function() {
               "div",
               { staticClass: "border border-success p-3 text-center" },
               [
-                _vm._m(0),
+                _c("div", {}, [
+                  _c("span", [_vm._v(_vm._s(_vm.acceptedAddress))])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "mt-2" }, [
+                  _c("input", {
+                    attrs: { type: "hidden", name: "acceptedLat" },
+                    domProps: { value: _vm.acceptedLat }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    attrs: { type: "hidden", name: "acceptedLon" },
+                    domProps: { value: _vm.acceptedLon }
+                  }),
+                  _vm._v(" "),
                   _c(
                     "button",
                     {
@@ -48566,7 +48635,9 @@ var render = function() {
               "div",
               { staticClass: "border border-success p-3 text-center" },
               [
-                _vm._m(1),
+                _c("div", {}, [
+                  _c("span", [_vm._v(_vm._s(_vm.formattedAddress))])
+                ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "mt-2" }, [
                   _c(
@@ -48648,24 +48719,7 @@ var render = function() {
       : _vm._e()
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", {}, [
-      _c("span", [_vm._v("181 Sherman Ave, Lexington, KY 40502, USA")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", {}, [
-      _c("span", [_vm._v("181 Sherman Ave, Lexington, KY 40502, USA")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
