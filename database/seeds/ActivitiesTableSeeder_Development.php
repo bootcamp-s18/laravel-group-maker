@@ -63,7 +63,7 @@ class ActivitiesTableSeeder_Development extends Seeder
         'updated_at' => Carbon::now()
 	  ]);
 	  
-	  DB::table('activities')->insert([
+	  	DB::table('activities')->insert([
         'name' => 'Under Water Basket Weaving',
         'description' => 'The art or activity of creating woven baskets under water.',
         'created_at' => Carbon::now(),
@@ -77,5 +77,11 @@ class ActivitiesTableSeeder_Development extends Seeder
         'updated_at' => Carbon::now()
       ]);
 
+			DB::table('activities')->insert([
+        'name' => 'Netflix and Hot Takes',
+        'description' => 'Liberté, égalité, fraternité my dude. Opossums are the best. This is the hill I will die on.',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now()
+      ]);
     }
 }
