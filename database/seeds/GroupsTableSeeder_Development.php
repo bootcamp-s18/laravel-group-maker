@@ -22,7 +22,7 @@ class GroupsTableSeeder_Development extends Seeder
 		$knitting = \App\Activity::where('name', '=', 'Knitting')->first();
 		$soccer = \App\Activity::where('name', '=', 'Soccer')->first();
 		$film = \App\Activity::where('name', '=', 'Film')->first();
-    $comedy = \App\Activity:where('name','Stand-Up Comedy')->first();
+        $comedy = \App\Activity:where('name','Stand-Up Comedy')->first();
 		$underWaterBasketWeaving = \App\Activity::where('name', '=', 'Under Water Basket Weaving')->first();
 
 
@@ -35,7 +35,7 @@ class GroupsTableSeeder_Development extends Seeder
 		$kevin = \App\User::where('name', '=', 'Kevin')->first();
 		$chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
 		$kar = \App\User::where('name', '=', 'Kar')->first();
-    $dimitri = \App\User::where('name', '=', 'Dimitri')->first();
+        $dimitri = \App\User::where('name', '=', 'Dimitri')->first();
 		$erik2 = \App\User::where('name', '=', 'Erik Wolfe')->first();
 
 
