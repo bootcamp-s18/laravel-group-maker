@@ -235,6 +235,11 @@ class GroupsTableSeeder_Development extends Seeder
         $groupRyan->max_members = 10;
         $groupRyan->is_virtual = 0;
         $groupRyan->invitation_key = Uuid::generate();
-        $groupRyan->save();
+		$groupRyan->created_at = Carbon::now();
+		$groupRyan->updated_at = Carbon::now();
+		$groupRyan->default_lat = 41.8343182;
+		$groupRyan->default_lon = -1.5331031;
+		$groupRyan->save();
+		
     }
 }
