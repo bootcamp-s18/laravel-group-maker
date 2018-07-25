@@ -79,7 +79,7 @@ class UsersTableSeeder_Development extends Seeder
         'password' => bcrypt('password'),
         'is_admin' => 1,
         'created_at' => Carbon::now(),
-        'updated_at' => Carbon::now()
+        'updated_at' => Carbon::now(),
         'default_lat' => 41.9028,
         'default_lon' => 2.4964
       ]);
