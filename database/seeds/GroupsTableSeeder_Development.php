@@ -81,7 +81,7 @@ class GroupsTableSeeder_Development extends Seeder
 			'default_lat' => 38.039189,
 			'default_lon' => -84.5458872
 		]);
-		
+
 		DB::table('groups')->insert([
     		'name' => 'Erik\'s Under Water Basket Weaving Group',
     		'description' => 'Once a year we all go to Ocracoke Island off the shore from North Carolina and wade amongst the fishies whilst we make our spirit baskets. These baskets represent our heart and soul and once we are finished we cast them out in the ocean with our worries and troubles.',
@@ -185,14 +185,16 @@ class GroupsTableSeeder_Development extends Seeder
 
         // Chris B's group
         $groupChris = new \App\Group;
-    	$groupChris->name = 'Woodland Soccer Club';
-    	$groupChris->description = 'Soccer at Woodland Park';
+    	$groupChris->name = 'Richmond Soccer Club';
+    	$groupChris->description = 'Soccer at Gibson Bay';
     	$groupChris->creator_id = $chrisBrowder->id;
     	$groupChris->activity_id = $soccer->id;
     	$groupChris->is_private = 0;
     	$groupChris->is_accepting_members = 1;
     	$groupChris->max_members = 22;
     	$groupChris->is_virtual = 0;
+        $groupChris->default_lat = 37.737253;
+        $groupChris->default_lon = -84.254773;
     	$groupChris->invitation_key = Uuid::generate();
     	$groupChris->save();
 
