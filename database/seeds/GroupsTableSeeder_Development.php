@@ -22,7 +22,9 @@ class GroupsTableSeeder_Development extends Seeder
 		$knitting = \App\Activity::where('name', '=', 'Knitting')->first();
 		$soccer = \App\Activity::where('name', '=', 'Soccer')->first();
 		$film = \App\Activity::where('name', '=', 'Film')->first();
+    $comedy = \App\Activity:where('name','Stand-Up Comedy')->first();
 		$underWaterBasketWeaving = \App\Activity::where('name', '=', 'Under Water Basket Weaving')->first();
+
 
 		// Creators
 		$aaron = \App\User::where('name', '=', 'Aaron')->first();
@@ -33,7 +35,9 @@ class GroupsTableSeeder_Development extends Seeder
 		$kevin = \App\User::where('name', '=', 'Kevin')->first();
 		$chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
 		$kar = \App\User::where('name', '=', 'Kar')->first();
+    $dimitri = \App\User::where('name', '=', 'Dimitri')->first();
 		$erik2 = \App\User::where('name', '=', 'Erik Wolfe')->first();
+
 
 		// Participants
 		$beth = \App\User::where('name', '=', 'Beth')->first();
@@ -184,6 +188,19 @@ class GroupsTableSeeder_Development extends Seeder
         $groupChris->members()->attach($chrisBrowder->id);
         $groupChris->members()->attach($opie->id);
     	$groupChris->members()->attach(\App\User::where('name', '=', 'Ginny')->first()->id);
+
+        // Dimitri's Group
+        $groupDimitri = new \App\Group;
+        $groupDimitri->name = 'Stand-Up by Dimitri';
+        $groupDimitri->description = 'I perform 3 minute routines with 1 minute intermissions. One-on-one sessions available. Laughing is mandatory.';
+        $groupDimitri->creator_id = $dimitri->id;
+        $groupDimitri->activity_id = $comedy->id;
+        $groupDimitri->is_private = 0;
+        $groupDimitri->is_accepting_members = 1;
+        $groupDimitri->max_members = 2;
+        $groupDimitri->is_virtual = 0;
+        $groupDimitri->invitation_key = Uuid::generate();
+        $groupDimitri->save();
 
     }
 }

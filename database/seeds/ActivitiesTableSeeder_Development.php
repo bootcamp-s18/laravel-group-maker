@@ -70,5 +70,12 @@ class ActivitiesTableSeeder_Development extends Seeder
         'updated_at' => Carbon::now()
       ]);
 
+      DB::table('activities')->insert([
+        'name' => 'Stand-up Comedy',
+        'description' => 'Practice jokes or have a laugh!',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now()
+      ]);
+
     }
 }
