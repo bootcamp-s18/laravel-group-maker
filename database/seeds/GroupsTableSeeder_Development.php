@@ -43,7 +43,6 @@ class GroupsTableSeeder_Development extends Seeder
 		$erik2 = \App\User::where('name', '=', 'Erik Wolfe')->first();
 		$ryan = \App\User::where('name', '=', 'Ryan Borja')->first();
 
-
 		// Participants
 		$beth = \App\User::where('name', '=', 'Beth')->first();
 		$chris = \App\User::where('name', '=', 'Chris')->first();
@@ -162,8 +161,6 @@ class GroupsTableSeeder_Development extends Seeder
     		'updated_at' => Carbon::now()
        	]);
 
-
-
     	// Group #2 - a private group that's looking for a player, with creator as participant.
     	// This example uses models to interact with the database.
     	$group2 = new \App\Group;
@@ -237,6 +234,11 @@ class GroupsTableSeeder_Development extends Seeder
         $groupRyan->max_members = 10;
         $groupRyan->is_virtual = 0;
         $groupRyan->invitation_key = Uuid::generate();
-        $groupRyan->save();
+		$groupRyan->created_at = Carbon::now();
+		$groupRyan->updated_at = Carbon::now();
+		$groupRyan->default_lat = 41.8343182;
+		$groupRyan->default_lon = -1.5331031;
+		$groupRyan->save();
+		
     }
 }
