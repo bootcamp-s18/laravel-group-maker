@@ -23,7 +23,7 @@
                     <th>Name</th>
                     <th>Creator</th>
                     <th>Activity</th>
-                    <th>Distance From Me</th>
+                    <th>Distance<br />(miles)</th>
                     <th># Participants</th>
                     <th>Max Participants</th>
                     <th>Actions</th>
@@ -100,15 +100,58 @@
 
                 var groups_array = this.groupsData;
                 var search_string = this.searchString.toLowerCase();
+                var search_distance = parseInt(this.searchDistance);
 
-                if (!search_string) {
-                    return groups_array;
+                if ( this.searchDistance != '' && this.searchDistance != search_distance ) {
+                    return [];
                 }
 
                 groups_array = groups_array.filter(function(item) {
-                    if(item.name.toLowerCase().indexOf(search_string) !== -1) {
-                        return item;
+
+                    if (!search_string) {
+
+                        if (!search_distance) {
+
+                            // Return all
+                            return item;
+
+                        }
+
+                        else {
+
+                            // Return groups that are closer than the search distance
+                            if (item.distance_from_me && item.distance_from_me <= search_distance) {
+                                return item;
+                            }
+
+                        }
+
                     }
+
+                    else {
+
+                        if (!search_distance) {
+
+                            // Return groups with names that match the search string
+                            if (item.name.toLowerCase().indexOf(search_string) !== -1) {
+                                return item;
+                            }
+
+                        }
+
+                        else {
+
+                            // Return groups that match both the search string and search distance
+                            if (    item.name.toLowerCase().indexOf(search_string) !== -1 && 
+                                    item.distance_from_me &&
+                                    item.distance_from_me <= search_distance) {
+                                        return item;
+                            }
+
+                        }
+
+                    }
+                
                 });
 
                 return groups_array;

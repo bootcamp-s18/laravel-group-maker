@@ -47,7 +47,18 @@ class User extends Authenticatable
 
         if ( $this->default_lat && $this->default_lon && $this->coordIsValid($lat) && $this->coordIsValid($lon) ) {
 
-            // do the calculation!
+            $r = 6371; // radius of the earth in km
+
+            $dLat = deg2rad($this->default_lat - $lat);
+            $dLon = deg2rad($this->default_lon - $lon);
+
+            $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($lat)) * cos(deg2rad($this->default_lat)) * sin($dLon/2) * sin($dLon/2);
+
+            $c = 2 * atan2(sqrt($a), sqrt(1-$a));
+
+            $d = $r * $c; // remember, km!
+
+            return round($d * 0.621371, 2); // return in miles rounded to 2 decimal places
 
         }
         return NULL; 
@@ -56,6 +67,5 @@ class User extends Authenticatable
     public function coordIsValid($coord) {
         return is_numeric($coord);
     }
-
 
 }
