@@ -103,6 +103,10 @@ class GroupController extends Controller
             $group->is_virtual = (array_key_exists('isVirtual', $input)) ? '1' : '0';
             $group->is_accepting_members = (array_key_exists('isAcceptingMembers', $input)) ? '1' : '0';
             $group->invitation_key = \Uuid::generate();
+
+            $group->default_lat = array_key_exists('accepted_lat', $input) ? $input['accepted_lat'] : null;
+            $group->default_lon = array_key_exists('accepted_lon', $input) ? $input['accepted_lon'] : null;
+
             $group->save();
             $request->session()->flash('status', 'Group created!');
             return redirect()->route('groups.index');
