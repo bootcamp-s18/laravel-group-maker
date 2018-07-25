@@ -68,8 +68,8 @@ class UsersTableSeeder_Development extends Seeder
         'email' => 'bethsalvatore2018@gmail.com',
         'password' => bcrypt('beth123'),
         'is_admin' => 0,
-        'default_lat'=>37.974112;
-        'default_lon'=>-84.467683;
+        'default_lat'=>37.974112,
+        'default_lon'=>-84.467683,
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now()
       ]);
