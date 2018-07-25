@@ -37,7 +37,7 @@ class GroupsTableSeeder_Development extends Seeder
 		$kar = \App\User::where('name', '=', 'Kar')->first();
         $dimitri = \App\User::where('name', '=', 'Dimitri')->first();
 		$erik2 = \App\User::where('name', '=', 'Erik Wolfe')->first();
-		$ryan = \App\User::where('name', '=', 'Ryan')->first();
+		$ryan = \App\User::where('name', '=', 'Ryan Borja')->first();
 
 		// Participants
 		$beth = \App\User::where('name', '=', 'Beth')->first();
