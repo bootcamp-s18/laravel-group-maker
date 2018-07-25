@@ -147,6 +147,8 @@ class GroupController extends Controller
             $group->is_private = old('isPrivate') ? '1' : '0';
             $group->is_virtual = old('isVirtual') ? '1' : '0';
             $group->is_accepting_members = (old('isAcceptingMembers')) ? '1' : '0';
+            $group->default_lat = old('accepted_lat');
+            $group->default_lon = old('accepted_lon');
         }
 
         $activities = \App\Activity::orderBy('name')->get();
@@ -180,6 +182,10 @@ class GroupController extends Controller
         $group->is_private = (array_key_exists('isPrivate', $input)) ? '1' : '0';
         $group->is_virtual = (array_key_exists('isVirtual', $input)) ? '1' : '0';
         $group->is_accepting_members = (array_key_exists('isAcceptingMembers', $input)) ? '1' : '0';
+
+        $group->default_lat = array_key_exists('accepted_lat', $input) ? $input['accepted_lat'] : null;
+        $group->default_lon = array_key_exists('accepted_lon', $input) ? $input['accepted_lon'] : null;
+        
         $group->save();
         $request->session()->flash('status', 'Group updated!');
         return redirect()->route('groups.index');

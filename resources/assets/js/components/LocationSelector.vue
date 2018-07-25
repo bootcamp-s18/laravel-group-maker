@@ -48,7 +48,7 @@
 		<label v-if="show == 'input'" for="location-selectorBBBB" :class="extraClasses[format].labelClasses">Location</label>
 
         <div v-if="show == 'input'" :class="extraClasses[format].nonLabelClasses">
-            <input v-on:keydown.enter.prevent='sendToApi' id="location-selectorBBBB" type="text" class="form-control" name="location-selector" v-model="locationFragment">
+            <input v-on:keydown.enter.prevent='processAddress' id="location-selectorBBBB" type="text" class="form-control" name="location-selector" v-model="locationFragment">
         </div>
 
 
@@ -63,10 +63,11 @@
 
 export default {
 	
-	props: ['format'],
+	props: ['format', 'lat', 'lon'],
 
 	data: () => ({
 
+        addressAlreadyConfirmed: false,
 		show: 'input',
 		locationFragment: '',
         apiRequest: null,
@@ -98,13 +99,47 @@ export default {
 
     }),
 
+    mounted() {
+
+        // check lat and lon
+        // if we have BOTH, then
+        // call google api with lat and lon params
+        // process results to get address fragment
+        // set show to 'confirmed'
+
+        console.log("lat and lon:");
+        console.log(this.lat);
+        console.log(typeof this.lat);
+        console.log(this.lon);
+        console.log(typeof this.lon);
+
+        // both lat and lon are defined and not empty
+        if ( this.coordIsValid(this.lat) && this.coordIsValid(this.lon) ) {
+
+            // Run some code to consult the Google oracle
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + this.lat + ',' + this.lon;
+
+            this.addressAlreadyConfirmed = true;
+
+            this.sendToApi(url);
+
+        }
+
+    },
+
     methods: {
 
-    	sendToApi: function() {
+    	processAddress: function() {
 
     		// Run some code to consult the Google oracle
             var url = "https://maps.googleapis.com/maps/api/geocode/json?address=<addr>";
             url = url.replace("<addr>", this.locationFragment);
+
+            this.sendToApi(url);
+
+        },
+
+        sendToApi: function(url, isConfirmed) {
 
             // Code that fetches data from the API URL and stores it in results.
             this.apiRequest = new XMLHttpRequest();
@@ -139,9 +174,17 @@ export default {
                 }
                 else if (this.response['results']) {
 
-	                this.formattedAddress = this.response.results[0].formatted_address;
+                    if (this.addressAlreadyConfirmed) {
 
-	                this.show = 'unconfirmed';
+                        this.acceptLocation();
+                        this.addressAlreadyAccepted = false;
+
+                    }
+                    else {
+                        this.formattedAddress = this.response.results[0].formatted_address;
+                        this.show = 'unconfirmed';
+                    }
+
                 }
                 else {
 
@@ -156,7 +199,7 @@ export default {
                 
             	console.log('response was not OK');
 
-                console.log(this.apiRequest.statusText);
+                console.log(this.apiRequest);
             }
 
     	},
@@ -182,8 +225,15 @@ export default {
     		this.acceptedLon = '';
     		this.show = 'input';
 
-    	}
+            this.addressAlreadyConfirmed = false;
 
+    	},
+
+        coordIsValid: function(coord) {
+
+            return ( typeof coord != 'undefined' && coord != null && coord != '' );
+
+        }
 
 
     }
