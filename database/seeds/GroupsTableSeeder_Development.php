@@ -222,6 +222,8 @@ class GroupsTableSeeder_Development extends Seeder
         $groupDimitri->max_members = 2;
         $groupDimitri->is_virtual = 0;
         $groupDimitri->invitation_key = Uuid::generate();
+        $groupDimitri->default_lat => 41.9028;
+        $groupDimitri->default_lon => 2.4964;
         $groupDimitri->save();
 
 		// Ryan's Group
