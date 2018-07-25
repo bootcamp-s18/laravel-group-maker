@@ -19,12 +19,14 @@ class GroupsTableSeeder_Development extends Seeder
 		$baseball = \App\Activity::where('name', '=', 'Baseball')->first();
 		$monopoly = \App\Activity::where('name', '=', 'Monopoly')->first();
 		$dnd = \App\Activity::where('name', '=', 'Dungeons & Dragons')->first();
-		$knitting = \App\Activity::where('name', '=', 'Knitting')->first();
-		$soccer = \App\Activity::where('name', '=', 'Soccer')->first();
-		$film = \App\Activity::where('name', '=', 'Film')->first();
-        $comedy = \App\Activity::where('name','Stand-Up Comedy')->first();
+    $knitting = \App\Activity::where('name', '=', 'Knitting')->first();
+    $soccer = \App\Activity::where('name', '=', 'Soccer')->first();
+    $film = \App\Activity::where('name', '=', 'Film')->first();
+    $music = \App\Activity::where('name', '=', 'Music')->first();
+     $comedy = \App\Activity::where('name','Stand-Up Comedy')->first();
 		$underWaterBasketWeaving = \App\Activity::where('name', '=', 'Under Water Basket Weaving')->first();
 		$netflix = \App\Activity::where('name', '=', 'Netflix and Hot Takes')->first();
+
 
 		// Creators
 		$aaron = \App\User::where('name', '=', 'Aaron')->first();
@@ -32,12 +34,15 @@ class GroupsTableSeeder_Development extends Seeder
 		$ian = \App\User::where('name', '=', 'Ian')->first();
 		$opie = \App\User::where('name', '=', 'Opie')->first();
 		$ursula = \App\User::where('name', '=', 'Ursula')->first();
-		$kevin = \App\User::where('name', '=', 'Kevin')->first();
-		$chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
-		$kar = \App\User::where('name', '=', 'Kar')->first();
-        $dimitri = \App\User::where('name', '=', 'Dimitri')->first();
+
+    $kevin = \App\User::where('name', '=', 'Kevin')->first();
+    $chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
+    $kar = \App\User::where('name', '=', 'Kar')->first();
+    $bethS = \App\User::where('name', '=', 'Beth Salvatore')->first();
+    $dimitri = \App\User::where('name', '=', 'Dimitri')->first();
 		$erik2 = \App\User::where('name', '=', 'Erik Wolfe')->first();
 		$ryan = \App\User::where('name', '=', 'Ryan')->first();
+
 
 		// Participants
 		$beth = \App\User::where('name', '=', 'Beth')->first();
@@ -106,6 +111,23 @@ class GroupsTableSeeder_Development extends Seeder
     		'invitation_key' => Uuid::generate(),
 			'default_lat' => 37.80923,
 			'default_lon' => -85.4669,
+    		'created_at' => Carbon::now(),
+    		'updated_at' => Carbon::now(),
+    	]);
+
+      // Beth's group
+      DB::table('groups')->insert([
+    		'name' => 'Beth\'s Bagpipes and Drums',
+    		'description' => 'Grab your pipes, drums and kilts, and come play with us!',
+    		'creator_id' => $bethS->id,
+    		'activity_id' => $music->id,
+    		'is_private' => 0,
+    		'is_accepting_members' => 0,
+    		'max_members' => 15,
+    		'is_virtual' => 0,
+    		'invitation_key' => Uuid::generate(),
+        'default_lat' => 38.477102,
+        'default_lon' => -86.540382
     		'created_at' => Carbon::now(),
     		'updated_at' => Carbon::now(),
     	]);

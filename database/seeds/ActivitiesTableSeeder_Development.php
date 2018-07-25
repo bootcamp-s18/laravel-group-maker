@@ -76,6 +76,13 @@ class ActivitiesTableSeeder_Development extends Seeder
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now()
       ]);
+      
+      DB::table('activities')->insert([
+        'name' => 'Music',
+        'description' => 'An informal group of musicians that gather to play music.',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now()
+      ]);
 
 			DB::table('activities')->insert([
         'name' => 'Netflix and Hot Takes',
@@ -83,5 +90,6 @@ class ActivitiesTableSeeder_Development extends Seeder
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now()
       ]);
+
     }
 }
