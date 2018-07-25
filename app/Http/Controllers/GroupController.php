@@ -126,7 +126,10 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        return "I should show a record now (not for editing)!";
+
+        $group = \App\Group::find($id);
+        return view('groups.show', compact('group'));
+
     }
 
     /**

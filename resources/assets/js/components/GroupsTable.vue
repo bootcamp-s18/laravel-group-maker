@@ -31,7 +31,7 @@
             </thead>
             <tbody>
                 <tr v-for="group in filteredGroups">
-                    <td>{{ group.name }}</td>
+                    <td><a :href="'/groups/' + group.id">{{ group.name }}</a></td>
                     <td>{{ group.creator_name }}</td>
                     <td>{{ group.activity_name }}</td>
                     <td>{{ group.distance_from_me }}

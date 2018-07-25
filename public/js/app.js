@@ -47846,7 +47846,11 @@ var render = function() {
         "tbody",
         _vm._l(_vm.filteredGroups, function(group) {
           return _c("tr", [
-            _c("td", [_vm._v(_vm._s(group.name))]),
+            _c("td", [
+              _c("a", { attrs: { href: "/groups/" + group.id } }, [
+                _vm._v(_vm._s(group.name))
+              ])
+            ]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(group.creator_name))]),
             _vm._v(" "),
