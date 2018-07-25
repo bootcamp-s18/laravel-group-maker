@@ -34,3 +34,6 @@ Route::get('/memberships', 'MembershipController@index')->name('memberships');
 Route::post('/memberships/{group_id}', 'MembershipController@join');
 Route::delete('/memberships/{group_id}', 'MembershipController@leave');
 
+Route::get('/profile', 'UserController@profile_edit');
+Route::post('/profile', 'UserController@profile_save');
+
