@@ -23,6 +23,10 @@ class GroupsTableSeeder_Development extends Seeder
     $soccer = \App\Activity::where('name', '=', 'Soccer')->first();
     $film = \App\Activity::where('name', '=', 'Film')->first();
     $music = \App\Activity::where('name', '=', 'Music')->first();
+     $comedy = \App\Activity::where('name','Stand-Up Comedy')->first();
+		$underWaterBasketWeaving = \App\Activity::where('name', '=', 'Under Water Basket Weaving')->first();
+		$netflix = \App\Activity::where('name', '=', 'Netflix and Hot Takes')->first();
+
 
 		// Creators
 		$aaron = \App\User::where('name', '=', 'Aaron')->first();
@@ -30,10 +34,15 @@ class GroupsTableSeeder_Development extends Seeder
 		$ian = \App\User::where('name', '=', 'Ian')->first();
 		$opie = \App\User::where('name', '=', 'Opie')->first();
 		$ursula = \App\User::where('name', '=', 'Ursula')->first();
+
     $kevin = \App\User::where('name', '=', 'Kevin')->first();
     $chrisBrowder = \App\User::where('name', '=', 'Chris Browder')->first();
     $kar = \App\User::where('name', '=', 'Kar')->first();
     $bethS = \App\User::where('name', '=', 'Beth Salvatore')->first();
+    $dimitri = \App\User::where('name', '=', 'Dimitri')->first();
+		$erik2 = \App\User::where('name', '=', 'Erik Wolfe')->first();
+		$ryan = \App\User::where('name', '=', 'Ryan')->first();
+
 
 		// Participants
 		$beth = \App\User::where('name', '=', 'Beth')->first();
@@ -58,7 +67,7 @@ class GroupsTableSeeder_Development extends Seeder
     		'updated_at' => Carbon::now()
     	]);
 
-      DB::table('groups')->insert([
+      	DB::table('groups')->insert([
     		'name' => 'Kevin\'s Knitting Circle',
     		'description' => 'We knit socks for possums',
     		'creator_id' => $kevin->id,
@@ -70,11 +79,27 @@ class GroupsTableSeeder_Development extends Seeder
     		'invitation_key' => Uuid::generate(),
     		'created_at' => Carbon::now(),
     		'updated_at' => Carbon::now(),
-        'default_lat' => 38.039189,
-        'default_lon' => -84.5458872
+			'default_lat' => 38.039189,
+			'default_lon' => -84.5458872
+		]);
+		
+		DB::table('groups')->insert([
+    		'name' => 'Erik\'s Under Water Basket Weaving Group',
+    		'description' => 'Once a year we all go to Ocracoke Island off the shore from North Carolina and wade amongst the fishies whilst we make our spirit baskets. These baskets represent our heart and soul and once we are finished we cast them out in the ocean with our worries and troubles.',
+    		'creator_id' => $erik2->id,
+    		'activity_id' => $underWaterBasketWeaving->id,
+    		'is_private' => 0,
+    		'is_accepting_members' => 0,
+    		'max_members' => 80,
+    		'is_virtual' => 1,
+    		'invitation_key' => Uuid::generate(),
+    		'created_at' => Carbon::now(),
+    		'updated_at' => Carbon::now(),
+			'default_lat' => 35.1146,
+			'default_lon' => 75.9810
     	]);
 
-      DB::table('groups')->insert([
+      	DB::table('groups')->insert([
     		'name' => 'Kar\'s Film Junkies',
     		'description' => 'We watch QUALITY movies while turning our noses up at mainstream cinema',
     		'creator_id' => $kar->id,
@@ -84,8 +109,8 @@ class GroupsTableSeeder_Development extends Seeder
     		'max_members' => 9,
     		'is_virtual' => 0,
     		'invitation_key' => Uuid::generate(),
-        'default_lat' => 37.80923,
-        'default_lon' => -85.4669
+			'default_lat' => 37.80923,
+			'default_lon' => -85.4669,
     		'created_at' => Carbon::now(),
     		'updated_at' => Carbon::now(),
     	]);
@@ -186,5 +211,30 @@ class GroupsTableSeeder_Development extends Seeder
         $groupChris->members()->attach($opie->id);
     	$groupChris->members()->attach(\App\User::where('name', '=', 'Ginny')->first()->id);
 
+        // Dimitri's Group
+        $groupDimitri = new \App\Group;
+        $groupDimitri->name = 'Stand-Up by Dimitri';
+        $groupDimitri->description = 'I perform 3 minute routines with 1 minute intermissions. One-on-one sessions available. Laughing is mandatory.';
+        $groupDimitri->creator_id = $dimitri->id;
+        $groupDimitri->activity_id = $comedy->id;
+        $groupDimitri->is_private = 0;
+        $groupDimitri->is_accepting_members = 1;
+        $groupDimitri->max_members = 2;
+        $groupDimitri->is_virtual = 0;
+        $groupDimitri->invitation_key = Uuid::generate();
+        $groupDimitri->save();
+
+		// Ryan's Group
+        $groupRyan = new \App\Group;
+        $groupRyan->name = 'Ryan\'s Opossum pals';
+        $groupRyan->description = 'Meet every week to watch documentaries on animals, politics, history, etc... Then we form hot takes and kill each other on hills. Opossums are the best. Maybe board games. Definitely whiskey.';
+        $groupRyan->creator_id = $ryan->id;
+        $groupRyan->activity_id = $netflix->id;
+        $groupRyan->is_private = 0;
+        $groupRyan->is_accepting_members = 1;
+        $groupRyan->max_members = 10;
+        $groupRyan->is_virtual = 0;
+        $groupRyan->invitation_key = Uuid::generate();
+        $groupRyan->save();
     }
 }

@@ -61,11 +61,32 @@ class ActivitiesTableSeeder_Development extends Seeder
         'description' => 'We watch movies',
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now()
+	  ]);
+	  
+	  	DB::table('activities')->insert([
+        'name' => 'Under Water Basket Weaving',
+        'description' => 'The art or activity of creating woven baskets under water.',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now()
       ]);
 
       DB::table('activities')->insert([
+        'name' => 'Stand-up Comedy',
+        'description' => 'Practice jokes or have a laugh!',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now()
+      ]);
+      
+      DB::table('activities')->insert([
         'name' => 'Music',
         'description' => 'An informal group of musicians that gather to play music.',
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now()
+      ]);
+
+			DB::table('activities')->insert([
+        'name' => 'Netflix and Hot Takes',
+        'description' => 'Liberté, égalité, fraternité my dude. Opossums are the best. This is the hill I will die on.',
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now()
       ]);
