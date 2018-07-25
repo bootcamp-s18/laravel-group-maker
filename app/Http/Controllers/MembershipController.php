@@ -29,6 +29,7 @@ class MembershipController extends Controller
             $group->creator_name = $group->creator()->get()[0]->name;
             $group->number_of_members = $group->members()->count();
             $group->activity_name = $group->activity()->get()[0]->name;
+            $group->distance_from_me = \Auth::user()->distance_from_me($group->default_lat, $group->default_lon);
         }
 
         $my_joined_groups = [];

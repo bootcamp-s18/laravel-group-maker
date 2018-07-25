@@ -28,8 +28,6 @@ class User extends Authenticatable
     ];
 
 
-
-
     public function groups_created() {
         return $this->hasMany('App\Group', 'creator_id');
     }
@@ -38,5 +36,26 @@ class User extends Authenticatable
     public function groups_joined() {
         return $this->belongsToMany('App\Group');
     }
+
+
+    public function distance_from_me($lat, $lon) {
+
+        // If user has default_lat and default_lon
+        // then return the distance in miles between
+        // the user and the coordinates that are passed in.
+        // If not, return undefined
+
+        if ( $this->default_lat && $this->default_lon && $this->coordIsValid($lat) && $this->coordIsValid($lon) ) {
+
+            // do the calculation!
+
+        }
+        return NULL; 
+    }
+
+    public function coordIsValid($coord) {
+        return is_numeric($coord);
+    }
+
 
 }

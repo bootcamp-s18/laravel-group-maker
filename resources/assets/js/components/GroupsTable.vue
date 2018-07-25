@@ -1,9 +1,20 @@
 <template>
     <div>
 
-        <div class="form-group">
-            <label for="searchBox" class="font-weight-bold">Filter Groups:</label>
-            <input id="searchBox" class="form-control" type="text" v-model="searchString" placeholder="Enter your search terms" />
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="searchBox" class="font-weight-bold">Filter Groups by Name:</label>
+                    <input id="searchBox" class="form-control" type="text" v-model="searchString" placeholder="Enter your search terms" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <label for="distanceBox" class="font-weight-bold">Show Nearby Groups:</label>
+                    <input id="distanceBox" class="form-control" type="text" v-model="searchDistance" placeholder="Search distance in miles" />
+                </div>
+                
+            </div>
         </div>
 
         <table class="table">
@@ -12,6 +23,7 @@
                     <th>Name</th>
                     <th>Creator</th>
                     <th>Activity</th>
+                    <th>Distance From Me</th>
                     <th># Participants</th>
                     <th>Max Participants</th>
                     <th>Actions</th>
@@ -22,6 +34,7 @@
                     <td>{{ group.name }}</td>
                     <td>{{ group.creator_name }}</td>
                     <td>{{ group.activity_name }}</td>
+                    <td>{{ group.distance_from_me }}
                     <td>{{ group.number_of_members }}</td>
                     <td>{{ group.max_members}}</td>
                     <td v-if="purpose === 'manage'">
@@ -73,6 +86,7 @@
 
         data: () => ({
             searchString: '',
+            searchDistance: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }),      
 

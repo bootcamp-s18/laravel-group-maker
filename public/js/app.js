@@ -47674,6 +47674,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -47682,6 +47695,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             searchString: '',
+            searchDistance: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         };
     },
@@ -47723,38 +47737,78 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "form-group" }, [
-      _c(
-        "label",
-        { staticClass: "font-weight-bold", attrs: { for: "searchBox" } },
-        [_vm._v("Filter Groups:")]
-      ),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.searchString,
-            expression: "searchString"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: {
-          id: "searchBox",
-          type: "text",
-          placeholder: "Enter your search terms"
-        },
-        domProps: { value: _vm.searchString },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "font-weight-bold", attrs: { for: "searchBox" } },
+            [_vm._v("Filter Groups by Name:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchString,
+                expression: "searchString"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              id: "searchBox",
+              type: "text",
+              placeholder: "Enter your search terms"
+            },
+            domProps: { value: _vm.searchString },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.searchString = $event.target.value
+              }
             }
-            _vm.searchString = $event.target.value
-          }
-        }
-      })
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c(
+            "label",
+            { staticClass: "font-weight-bold", attrs: { for: "distanceBox" } },
+            [_vm._v("Show Nearby Groups:")]
+          ),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchDistance,
+                expression: "searchDistance"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              id: "distanceBox",
+              type: "text",
+              placeholder: "Search distance in miles"
+            },
+            domProps: { value: _vm.searchDistance },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.searchDistance = $event.target.value
+              }
+            }
+          })
+        ])
+      ])
     ]),
     _vm._v(" "),
     _c("table", { staticClass: "table" }, [
@@ -47770,6 +47824,9 @@ var render = function() {
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(group.activity_name))]),
             _vm._v(" "),
+            _c("td", [
+              _vm._v(_vm._s(group.distance_from_me) + "\n                ")
+            ]),
             _c("td", [_vm._v(_vm._s(group.number_of_members))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(group.max_members))]),
@@ -47904,6 +47961,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Creator")]),
         _vm._v(" "),
         _c("th", [_vm._v("Activity")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Distance From Me")]),
         _vm._v(" "),
         _c("th", [_vm._v("# Participants")]),
         _vm._v(" "),
