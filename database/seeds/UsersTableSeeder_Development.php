@@ -93,7 +93,7 @@ class UsersTableSeeder_Development extends Seeder
         'created_at' => Carbon::now(),
         'updated_at' => Carbon::now(),
         'default_lat' => 41.9028,
-        'default_lon' => 2.4964
+        'default_lon' => 12.4964
       ]);
 
       DB::table('users')->insert([
