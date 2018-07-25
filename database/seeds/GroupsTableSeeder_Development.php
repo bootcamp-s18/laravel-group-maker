@@ -22,9 +22,9 @@ class GroupsTableSeeder_Development extends Seeder
 		$knitting = \App\Activity::where('name', '=', 'Knitting')->first();
 		$soccer = \App\Activity::where('name', '=', 'Soccer')->first();
 		$film = \App\Activity::where('name', '=', 'Film')->first();
-        $comedy = \App\Activity:where('name','Stand-Up Comedy')->first();
+        $comedy = \App\Activity::where('name','Stand-Up Comedy')->first();
 		$underWaterBasketWeaving = \App\Activity::where('name', '=', 'Under Water Basket Weaving')->first();
-
+		$netflix = \App\Activity::where('name', '=', 'Netflix and Hot Takes')->first();
 
 		// Creators
 		$aaron = \App\User::where('name', '=', 'Aaron')->first();
@@ -37,7 +37,7 @@ class GroupsTableSeeder_Development extends Seeder
 		$kar = \App\User::where('name', '=', 'Kar')->first();
         $dimitri = \App\User::where('name', '=', 'Dimitri')->first();
 		$erik2 = \App\User::where('name', '=', 'Erik Wolfe')->first();
-
+		$ryan = \App\User::where('name', '=', 'Ryan')->first();
 
 		// Participants
 		$beth = \App\User::where('name', '=', 'Beth')->first();
@@ -202,5 +202,17 @@ class GroupsTableSeeder_Development extends Seeder
         $groupDimitri->invitation_key = Uuid::generate();
         $groupDimitri->save();
 
+		// Ryan's Group
+        $groupRyan = new \App\Group;
+        $groupRyan->name = 'Ryan\'s Opossum pals';
+        $groupRyan->description = 'Meet every week to watch documentaries on animals, politics, history, etc... Then we form hot takes and kill each other on hills. Opossums are the best. Maybe board games. Definitely whiskey.';
+        $groupRyan->creator_id = $ryan->id;
+        $groupRyan->activity_id = $netflix->id;
+        $groupRyan->is_private = 0;
+        $groupRyan->is_accepting_members = 1;
+        $groupRyan->max_members = 10;
+        $groupRyan->is_virtual = 0;
+        $groupRyan->invitation_key = Uuid::generate();
+        $groupRyan->save();
     }
 }

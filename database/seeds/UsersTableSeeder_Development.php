@@ -41,14 +41,14 @@ class UsersTableSeeder_Development extends Seeder
       ]);
 
       DB::table('users')->insert([
-          'name' => "Chris Browder",
-          'email' => 'rcbrowder@gmail.com',
-          'password' => bcrypt('chris'),
-          'is_admin' => 1,
-          'created_at' => Carbon::now(),
-          'updated_at' => Carbon::now(),
-          'default_lat' => 37.769786,
-          'default_lon' => -84.362714
+        'name' => "Chris Browder",
+        'email' => 'rcbrowder@gmail.com',
+        'password' => bcrypt('chris'),
+        'is_admin' => 1,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+        'default_lat' => 37.769786,
+        'default_lon' => -84.362714
       ]);
 
       DB::table('users')->insert([
@@ -74,15 +74,26 @@ class UsersTableSeeder_Development extends Seeder
       ]);
 
       DB::table('users')->insert([
-          'name' => "Dimitri",
-          'email' => 'Dimitri@example.com',
-          'password' => bcrypt('password'),
-          'is_admin' => 1,
-          'created_at' => Carbon::now(),
-          'updated_at' => Carbon::now()
-          'default_lat' => 41.9028,
-          'default_lon' => 2.4964
-        ]);
+        'name' => "Dimitri",
+        'email' => 'Dimitri@example.com',
+        'password' => bcrypt('password'),
+        'is_admin' => 1,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now()
+        'default_lat' => 41.9028,
+        'default_lon' => 2.4964
+      ]);
 
+      DB::table('users')->insert([
+        'name' => 'Ryan Borja',
+        'email' => 'ryan@example.com',
+        'password' => bcrypt('dvorak'),
+        'is_admin' => 1,
+        'created_at' => Carbon::now(),
+        'updated_at' => Carbon::now(),
+        'default_lat' => 41.8343182,
+        'default_lon' => -1.5331031
+      ]);
+      
     }
 }
